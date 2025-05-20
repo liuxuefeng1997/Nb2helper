@@ -279,8 +279,10 @@ def readMemValue(address, _type="d"):
         size = 8
     elif _type == "f":
         size = 4
-    elif _type == "c":
+    elif _type == "b":
         size = 1
+    elif _type == "4b":
+        size = 4
     else:
         print("[ERROR]type error")
         return None

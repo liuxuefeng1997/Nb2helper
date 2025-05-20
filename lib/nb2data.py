@@ -38,9 +38,12 @@ NB2_TYPE = {
     "KNIFE_SPEED": "d",  # 近战武器攻速
     "TIME_OF_DAMAGE": "d",  # 伤害持续时间
     "CRIT_RATE": "d",  # 暴击几率
-    "GUN_EXP_PRT": "f"  # 武器升级经验百分比
+    "GUN_EXP_PRT": "f",  # 武器升级经验百分比
+    "IS_FLY": "b",  # 是否飞行
+    "IS_MACHINE_DAMAGE": "b",  # 机器是否损坏
+    "BOX_WIN_PROB": "f"  # 宝箱获胜概率
 }
-# d: 双浮点; f: 单浮点; c: 字节;
+# d: 双浮点; f: 单浮点; b: 字节; 4b: 4字节
 NB2_VALUE = {
     "GOLD": [0x20, 0x18, 0x10, 0x18, 0x210],  # 金币
     "HEALTH": [0x20, 0x18, 0x10, 0x18, 0x258],  # 血量(会暴毙，不推荐使用，可通过修改护盾变相无敌)
@@ -81,17 +84,20 @@ NB2_VALUE = {
     "KNIFE_SPEED": [0x20, 0x18, 0x10, 0x18, 0xE28],  # 近战武器攻速
     "TIME_OF_DAMAGE": [0x20, 0x18, 0x10, 0x18, 0x1200],  # 伤害持续时间
     "CRIT_RATE": [0x20, 0x18, 0x10, 0x18, 0x15F0],  # 暴击几率
-    "GUN_EXP_PRT": [0x180, 0x310, 0x468]  # 武器升级经验百分比
+    "GUN_EXP_PRT": [0x180, 0x310, 0x468],  # 武器升级经验百分比
+    "IS_FLY": [0x180, 0x310, 0x45E],  # 是否飞行
+    "IS_MACHINE_DAMAGE": [0x180, 0x310, 0x451],  # 机器是否损坏
+    "BOX_WIN_PROB": [0x180, 0x310, 0x438]  # 宝箱获胜概率
 }
 EXE_NAME = "NeonAbyss2.exe"
 DLL_NAME = "UnityPlayer.dll"
 DLL_OFFSET = 0x01C9D460
 MEM_OFFSETS = [0x8, 0x10, 0x28, 0x50]
 uplogs = {
-    "version": "2025.05.20.2243.0030",
+    "version": "2025.05.21.0040.0031",
     "lines": [
         "1、优化：重构代码以支持后续更新",
-        "2、新增：武器升级经验百分比实装",
+        "2、新增：新增飞行、机器是否损坏、宝箱获胜概率",
         "* 注意配置文件差异：可将旧的配置文件备份后删除，让程序创建默认配置以支持新增条目",
         "",
         "使用提示：",
