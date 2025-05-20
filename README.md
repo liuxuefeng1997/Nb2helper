@@ -25,6 +25,6 @@
 | TIME_OF_DAMAGE  | 伤害持续时间 | CURSE_LEVEL      | 诅咒等级         |
 | CRIT_RATE       | 暴击几率     | GOLD_SOUL_SUM    | 金色暗灵数量     |
 | TEMP_SOUL_SUM    | 临时暗灵数量     | GUN_EXP_PRT  | 武器升级经验百分比     |
-* 注意：武器升级经验百分比已添加但未实装
+
 ###
 ###
