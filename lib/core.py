@@ -275,17 +275,22 @@ def writeMemValue(address, value, _type="d"):
 
 
 def readMemValue(address, _type="d"):
-    if _type == "d":
-        size = 8
-    elif _type == "f":
-        size = 4
-    elif _type == "b":
-        size = 1
-    elif _type == "4b":
-        size = 4
-    else:
-        print("[ERROR]type error")
-        return None
+    match _type:
+        case "d":
+            size = 8
+        case "f":
+            size = 4
+        case "b":
+            size = 1
+        case "2b":
+            size = 2
+        case "4b":
+            size = 4
+        case "8b":
+            size = 8
+        case _:
+            print("[ERROR]type error")
+            return None
     pid = get_pid_by_name(EXE_NAME)
     data = read_memory(pid, address, size)
     return struct.unpack(f'<{_type}', data)[0]
