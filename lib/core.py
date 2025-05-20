@@ -232,66 +232,33 @@ def read_pointer_chain(pid, base_address, offsets, is_64bit):
 
 
 def get_pid_by_name(process_name):
-    """通过进程名获取PID（不区分大小写）"""
-    h_snapshot = kernel32.CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0)
-    if h_snapshot == -1:
-        raise ctypes.WinError(ctypes.get_last_error())
-
-    try:
-        entry = PROCESSENTRY32()
-        entry.dwSize = ctypes.sizeof(PROCESSENTRY32)
-
-        # 遍历第一个进程
-        if not kernel32.Process32First(h_snapshot, ctypes.byref(entry)):
-            raise ctypes.WinError(ctypes.get_last_error())
-
-        # 遍历进程列表
-        while True:
-            current_name = entry.szExeFile.decode('gbk').lower()  # 中文系统用gbk解码
-            if current_name == process_name.lower():
-                return entry.th32ProcessID
-
-            # 遍历下一个进程
-            if not kernel32.Process32Next(h_snapshot, ctypes.byref(entry)):
-                error_code = ctypes.get_last_error()
-                if error_code == 18:  # ERROR_NO_MORE_FILES
-                    break
-                else:
-                    raise ctypes.WinError(error_code)
-
-        raise RuntimeError(f"未找到进程: {process_name}")
-    finally:
-        kernel32.CloseHandle(h_snapshot)
+    pid = None
+    for proc in psutil.process_iter(attrs=['pid', 'name']):
+        if proc.info['name'] == process_name:
+            pid = proc.info['pid']
+            break
+    return pid
 
 
-def get_StartMemAddress():
+def getMemAddress(offsets):
     # 目标进程ID
-    TARGET_PID = get_pid_by_name(EXE_NAME)
-
+    pid = get_pid_by_name(EXE_NAME)
     try:
-        # 获取进程信息
-        is_64bit = is_64bit_process(TARGET_PID)
-
-        # 获取DLL基址
-        dll_base = get_module_base(TARGET_PID, DLL_NAME)
-
-        # 计算初始地址
-        start_address = dll_base + DLL_OFFSET
-        # 解析指针链
-        final_address = read_pointer_chain(TARGET_PID, start_address, MEM_OFFSETS, is_64bit)
-        # print(f"最终地址: 0x{final_address:X}")
-
+        is_64bit = is_64bit_process(pid)  # 获取进程信息
+        dll_base = get_module_base(pid, DLL_NAME)  # 获取DLL基址
+        start_address = dll_base + DLL_OFFSET  # 计算初始地址
+        final_address = read_pointer_chain(pid, start_address, offsets, is_64bit)  # 解析指针链
         return final_address
     except Exception as e:
-        # print(f"发生错误: {str(e)}")
+        a = e
         return None
 
 
-def get_MemAddress(offset):
-    if get_StartMemAddress() is not None:
-        start = get_StartMemAddress()
-        return start + offset
-    return None
+def getMemAddressWithOffset(offset=None):
+    if offset is None:
+        offset = [0x20, 0x18, 0x10, 0x18, 0x0]
+    n = MEM_OFFSETS + offset
+    return getMemAddress(n)
 
 
 def check_process_running(process_name):
@@ -326,4 +293,18 @@ def write_float(address, value):
     """写入单精度浮点数"""
     pid = get_pid_by_name(EXE_NAME)
     data = struct.pack('<f', value)
+    return write_memory(pid, address, data)
+
+
+def read_char(address):
+    """读取单字节"""
+    pid = get_pid_by_name(EXE_NAME)
+    data = read_memory(pid, address, 4)
+    return struct.unpack('<c', data)[0]
+
+
+def write_char(address, value):
+    """写入单字节"""
+    pid = get_pid_by_name(EXE_NAME)
+    data = struct.pack('<c', value)
     return write_memory(pid, address, data)

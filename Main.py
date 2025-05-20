@@ -84,27 +84,27 @@ def file_hash(file_path: str, hash_method) -> str:
 def checkAndSetData(tag):
     if CONFIG_DATA is not None:
         if has_key(CONFIG_DATA, tag) and CONFIG_DATA[tag]["enable"]:
-            write_double(get_MemAddress(NB2[tag]), CONFIG_DATA[tag]["value"])
+            write_double(getMemAddressWithOffset(NB2[tag]), CONFIG_DATA[tag]["value"])
 
 
 def has_max(tag, lock_to_max=True):
-    if read_double(get_MemAddress(NB2[tag])) < CONFIG_DATA[tag]["value"]:
-        if read_double(get_MemAddress(NB2[f"MAX_{tag}"])) < CONFIG_DATA[tag]["value"]:  # 当最大值小于设定值时，修改最大值
-            write_double(get_MemAddress(NB2[f"MAX_{tag}"]), CONFIG_DATA[tag]["value"])
+    if read_double(getMemAddressWithOffset(NB2[tag])) < CONFIG_DATA[tag]["value"]:
+        if read_double(getMemAddressWithOffset(NB2[f"MAX_{tag}"])) < CONFIG_DATA[tag]["value"]:  # 当最大值小于设定值时，修改最大值
+            write_double(getMemAddressWithOffset(NB2[f"MAX_{tag}"]), CONFIG_DATA[tag]["value"])
     if lock_to_max:
-        if read_double(get_MemAddress(NB2[f"MAX_{tag}"])) > read_double(
-                get_MemAddress(NB2[tag])):  # 当值不满时，修改值至最大
-            write_double(get_MemAddress(NB2[tag]),
-                         read_double(get_MemAddress(NB2[f"MAX_{tag}"])))
+        if read_double(getMemAddressWithOffset(NB2[f"MAX_{tag}"])) > read_double(
+                getMemAddressWithOffset(NB2[tag])):  # 当值不满时，修改值至最大
+            write_double(getMemAddressWithOffset(NB2[tag]),
+                         read_double(getMemAddressWithOffset(NB2[f"MAX_{tag}"])))
     else:
-        if read_double(get_MemAddress(NB2[tag])) < CONFIG_DATA[tag]["value"]:  # 当值小于设定时修改值
-            write_double(get_MemAddress(NB2[tag]), CONFIG_DATA[tag]["value"])
+        if read_double(getMemAddressWithOffset(NB2[tag])) < CONFIG_DATA[tag]["value"]:  # 当值小于设定时修改值
+            write_double(getMemAddressWithOffset(NB2[tag]), CONFIG_DATA[tag]["value"])
 
 
 def has_min(tag):
     # 当值小于设定时修改值
-    if read_double(get_MemAddress(NB2[tag])) < CONFIG_DATA[tag]["value"]:
-        write_double(get_MemAddress(NB2[tag]), CONFIG_DATA[tag]["value"])
+    if read_double(getMemAddressWithOffset(NB2[tag])) < CONFIG_DATA[tag]["value"]:
+        write_double(getMemAddressWithOffset(NB2[tag]), CONFIG_DATA[tag]["value"])
 
 
 def runOnce():
@@ -133,7 +133,7 @@ if __name__ == "__main__":
         if check_process_running(EXE_NAME):
             checkConfig()
 
-            stadd = get_StartMemAddress()
+            stadd = getMemAddressWithOffset()
             caches = read_cache()
             if caches is not None:
                 add = caches["start_address"]
@@ -152,7 +152,7 @@ if __name__ == "__main__":
                     runOnce()
                     print("\033c", end="")
                     upLog(False)
-                    print(f"\n基址: 0x{get_StartMemAddress():X}")
+                    print(f"\n地址段: 0x{getMemAddressWithOffset():X}")
                     print(f"[{time.ctime()}]修改器已启动")
                     tips = ""
 
@@ -160,7 +160,7 @@ if __name__ == "__main__":
                     runOnce()
                     print("\033c", end="")
                     upLog(False)
-                    print(f"\n常用数值基址: 0x{get_StartMemAddress():X}{tips}")
+                    print(f"\n地址段: 0x{getMemAddressWithOffset():X}{tips}")
                     tips = ""
 
             if add is not None and check_process_running(EXE_NAME):
