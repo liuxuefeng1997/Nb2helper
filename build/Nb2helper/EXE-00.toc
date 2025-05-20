@@ -104,7 +104,7 @@
  [],
  False,
  False,
- 1747741886,
+ 1747752254,
  [('run.exe',
    'X:\\Project\\IntelliJ_IDEA\\NB2Mem\\.venv\\lib\\site-packages\\PyInstaller\\bootloader\\Windows-64bit-intel\\run.exe',
    'EXECUTABLE')],

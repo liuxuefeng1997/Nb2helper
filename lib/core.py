@@ -268,43 +268,22 @@ def check_process_running(process_name):
     return False
 
 
-def read_double(address):
-    """读取双精度浮点数"""
+def writeMemValue(address, value, _type="d"):
     pid = get_pid_by_name(EXE_NAME)
-    data = read_memory(pid, address, 8)
-    return struct.unpack('<d', data)[0]
-
-
-def write_double(address, value):
-    """写入双精度浮点数"""
-    pid = get_pid_by_name(EXE_NAME)
-    data = struct.pack('<d', value)
+    data = struct.pack(f'<{_type}', value)
     return write_memory(pid, address, data)
 
 
-def read_float(address):
-    """读取单精度浮点数"""
+def readMemValue(address, _type="d"):
+    if _type == "d":
+        size = 8
+    elif _type == "f":
+        size = 4
+    elif _type == "c":
+        size = 1
+    else:
+        print("[ERROR]type error")
+        return None
     pid = get_pid_by_name(EXE_NAME)
-    data = read_memory(pid, address, 4)
-    return struct.unpack('<f', data)[0]
-
-
-def write_float(address, value):
-    """写入单精度浮点数"""
-    pid = get_pid_by_name(EXE_NAME)
-    data = struct.pack('<f', value)
-    return write_memory(pid, address, data)
-
-
-def read_char(address):
-    """读取单字节"""
-    pid = get_pid_by_name(EXE_NAME)
-    data = read_memory(pid, address, 4)
-    return struct.unpack('<c', data)[0]
-
-
-def write_char(address, value):
-    """写入单字节"""
-    pid = get_pid_by_name(EXE_NAME)
-    data = struct.pack('<c', value)
-    return write_memory(pid, address, data)
+    data = read_memory(pid, address, size)
+    return struct.unpack(f'<{_type}', data)[0]

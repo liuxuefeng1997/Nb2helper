@@ -1,206 +1,47 @@
-default_config_data = {
-    "DAMAGE": {
-        "_self": "受击伤害",
-        "enable": False,
-        "value": 1
-    },
-    "GOLD": {
-        "_self": "金币",
-        "lock": False,
-        "enable": False,
-        "value": 199
-    },
-    "KEYS": {
-        "_self": "钥匙",
-        "lock": False,
-        "enable": False,
-        "value": 9
-    },
-    "BOMBER": {
-        "_self": "手雷",
-        "lock": False,
-        "enable": False,
-        "value": 9
-    },
-    "BOMBER_ICE": {
-        "_self": "冰霜手雷",
-        "lock": False,
-        "enable": False,
-        "value": 9
-    },
-    "BOMBER_FIRE": {
-        "_self": "火焰手雷",
-        "lock": False,
-        "enable": False,
-        "value": 9
-    },
-    "BOMBER_THUNDER": {
-        "_self": "雷电手雷",
-        "lock": False,
-        "enable": False,
-        "value": 9
-    },
-    "BOMBER_DARK": {
-        "_self": "暗手雷",
-        "lock": False,
-        "enable": False,
-        "value": 9
-    },
-    "BOMBER_POISON": {
-        "_self": "毒素手雷",
-        "lock": False,
-        "enable": False,
-        "value": 9
-    },
-    "MANA": {
-        "_self": "水晶",
-        "lock": False,
-        "lock_to_max": True,
-        "enable": False,
-        "value": 5
-    },
-    "SHIELDS": {
-        "_self": "护盾",
-        "lock": False,
-        "enable": False,
-        "value": 0
-    },
-    "HEALTH": {
-        "_self": "血量",
-        "lock": False,
-        "lock_to_max": True,
-        "enable": False,
-        "value": 8
-    },
-    "GUN_LEN": {
-        "_self": "射程",
-        "enable": False,
-        "value": 1
-    },
-    "GUN_SPEED": {
-        "_self": "射速",
-        "enable": False,
-        "value": 1
-    },
-    "GUN_SUM": {
-        "_self": "弹道",
-        "enable": False,
-        "value": 1
-    },
-    "GUN_BOLL": {
-        "_self": "子弹伤害",
-        "enable": False,
-        "value": 1
-    },
-    "GUN_LEVEL": {
-        "_self": "武器等级",
-        "lock": False,
-        "enable": False,
-        "value": 1
-    },
-    "MOVE_SPEED": {
-        "_self": "移速",
-        "enable": False,
-        "value": 11
-    },
-    "JUMP_HIGHER": {
-        "_self": "跳跃高度",
-        "enable": False,
-        "value": 95
-    },
-    "JUMP_SUM": {
-        "_self": "跳跃次数",
-        "enable": False,
-        "value": 0
-    },
-    "JUMP_SUM_NO_MARK": {
-        "_self": "跳跃次数（无印记）",
-        "enable": False,
-        "value": 0
-    },
-    "FIRE_LEVEL": {
-        "_self": "火焰伤害等级",
-        "enable": False,
-        "value": 1
-    },
-    "THUNDER_LEVEL": {
-        "_self": "闪电伤害等级",
-        "enable": False,
-        "value": 1
-    },
-    "POISON_LEVEL": {
-        "_self": "毒素伤害等级",
-        "enable": False,
-        "value": 1
-    },
-    "ICE_LEVEL": {
-        "_self": "冰霜伤害等级",
-        "enable": False,
-        "value": 1
-    },
-    "BLAST_LEVEL": {
-        "_self": "爆炸伤害等级",
-        "enable": False,
-        "value": 1
-    },
-    "MAGIC_LEVEL": {
-        "_self": "魔法伤害等级",
-        "enable": False,
-        "value": 1
-    },
-    "TEC_LEVEL": {
-        "_self": "科技伤害等级",
-        "enable": False,
-        "value": 1
-    },
-    "BUBBLE_LEVEL": {
-        "_self": "萌萌伤害等级",
-        "enable": False,
-        "value": 1
-    },
-    "PHYSICAL_LEVEL": {
-        "_self": "物理伤害等级",
-        "enable": False,
-        "value": 1
-    },
-    "SOUL_LEVEL": {
-        "_self": "暗灵伤害等级",
-        "enable": False,
-        "value": 1
-    },
-    "GOLD_SOUL_SUM": {
-        "_self": "金色暗灵数量",
-        "enable": False,
-        "value": 0
-    },
-    "TEMP_SOUL_SUM": {
-        "_self": "临时暗灵数量",
-        "lock": False,
-        "enable": False,
-        "value": 0
-    },
-    "CURSE_LEVEL": {
-        "_self": "诅咒等级",
-        "enable": False,
-        "value": 0
-    },
-    "KNIFE_SPEED": {
-        "_self": "近战武器攻速",
-        "enable": False,
-        "value": 1
-    },
-    "TIME_OF_DAMAGE": {
-        "_self": "伤害持续时间",
-        "enable": False,
-        "value": 1
-    },
-    "CRIT_RATE": {
-        "_self": "暴击几率",
-        "enable": False,
-        "value": 0
-    }
+NB2_TYPE = {
+    "GOLD": "d",  # 金币
+    "HEALTH": "d",  # 血量(会暴毙，不推荐使用，可通过修改护盾变相无敌)
+    "MAX_HEALTH": "d",  # 血量上限
+    "SHIELDS": "d",  # 护盾
+    "BOMBER": "d",  # 手雷
+    "BOMBER_ICE": "d",  # 冰霜手雷
+    "BOMBER_FIRE": "d",  # 火焰手雷
+    "BOMBER_THUNDER": "d",  # 雷电手雷
+    "BOMBER_DARK": "d",  # 暗手雷
+    "BOMBER_POISON": "d",  # 毒素手雷
+    "KEYS": "d",  # 钥匙
+    "MANA": "d",  # 水晶
+    "MAX_MANA": "d",  # 水晶上限
+    "GUN_LEN": "d",  # 射程
+    "GUN_SUM": "d",  # 子弹列数
+    "GUN_SPEED": "d",  # 射速
+    "GUN_BOLL": "d",  # 子弹伤害
+    "GUN_LEVEL": "d",  # 武器等级
+    "MOVE_SPEED": "d",  # 移动速度
+    "JUMP_HIGHER": "d",  # 跳跃高度
+    "JUMP_SUM_NO_MARK": "d",  # 无印记跳跃次数
+    "JUMP_SUM": "d",  # 跳跃次数
+    "FIRE_LEVEL": "d",  # 火焰伤害等级
+    "THUNDER_LEVEL": "d",  # 闪电伤害等级
+    "POISON_LEVEL": "d",  # 毒素伤害等级
+    "ICE_LEVEL": "d",  # 冰霜伤害等级
+    "BLAST_LEVEL": "d",  # 爆炸伤害等级
+    "MAGIC_LEVEL": "d",  # 魔法伤害等级
+    "TEC_LEVEL": "d",  # 科技伤害等级
+    "BUBBLE_LEVEL": "d",  # 萌萌伤害等级
+    "PHYSICAL_LEVEL": "d",  # 物理伤害等级
+    "SOUL_LEVEL": "d",  # 暗灵伤害等级
+    "CURSE_LEVEL": "d",  # 诅咒等级
+    "GOLD_SOUL_SUM": "d",  # 金色暗灵数量
+    "TEMP_SOUL_SUM": "d",  # 临时暗灵数量
+    "DAMAGE": "d",  # 受击伤害
+    "KNIFE_SPEED": "d",  # 近战武器攻速
+    "TIME_OF_DAMAGE": "d",  # 伤害持续时间
+    "CRIT_RATE": "d",  # 暴击几率
+    "GUN_EXP_PRT": "f"  # 武器升级经验百分比
 }
-NB2 = {
+# d: 双浮点; f: 单浮点; c: 字节;
+NB2_VALUE = {
     "GOLD": [0x20, 0x18, 0x10, 0x18, 0x210],  # 金币
     "HEALTH": [0x20, 0x18, 0x10, 0x18, 0x258],  # 血量(会暴毙，不推荐使用，可通过修改护盾变相无敌)
     "MAX_HEALTH": [0x20, 0x18, 0x10, 0x18, 0x588],  # 血量上限
@@ -247,9 +88,10 @@ DLL_NAME = "UnityPlayer.dll"
 DLL_OFFSET = 0x01C9D460
 MEM_OFFSETS = [0x8, 0x10, 0x28, 0x50]
 uplogs = {
-    "version": "2025.05.20.1949.0029",
+    "version": "2025.05.20.2243.0030",
     "lines": [
         "1、优化：重构代码以支持后续更新",
+        "2、新增：武器升级经验百分比实装",
         "* 注意配置文件差异：可将旧的配置文件备份后删除，让程序创建默认配置以支持新增条目",
         "",
         "使用提示：",

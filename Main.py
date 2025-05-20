@@ -4,6 +4,7 @@ import os
 import time
 
 from lib.core import *
+from lib.default_def import *
 
 CONFIG_DATA = None
 
@@ -18,9 +19,9 @@ def init():
 def checkConfig():
     if not os.path.exists("./config"):
         os.mkdir("./config")
-    write_config(default_config_data, True)
+    write_config(default_config, True)
     if not os.path.exists("./config/config.json"):
-        write_config(default_config_data)
+        write_config(default_config)
 
 
 def write_cache(_stadd, _hash_c="", _hash_e=""):
@@ -84,40 +85,41 @@ def file_hash(file_path: str, hash_method) -> str:
 def checkAndSetData(tag):
     if CONFIG_DATA is not None:
         if has_key(CONFIG_DATA, tag) and CONFIG_DATA[tag]["enable"]:
-            write_double(getMemAddressWithOffset(NB2[tag]), CONFIG_DATA[tag]["value"])
+            writeMemValue(getMemAddressWithOffset(NB2_VALUE[tag]), CONFIG_DATA[tag]["value"], NB2_TYPE[tag])
 
 
 def has_max(tag, lock_to_max=True):
-    if read_double(getMemAddressWithOffset(NB2[tag])) < CONFIG_DATA[tag]["value"]:
-        if read_double(getMemAddressWithOffset(NB2[f"MAX_{tag}"])) < CONFIG_DATA[tag]["value"]:  # 当最大值小于设定值时，修改最大值
-            write_double(getMemAddressWithOffset(NB2[f"MAX_{tag}"]), CONFIG_DATA[tag]["value"])
+    if readMemValue(getMemAddressWithOffset(NB2_VALUE[tag]), NB2_TYPE[tag]) < CONFIG_DATA[tag]["value"]:
+        if readMemValue(getMemAddressWithOffset(NB2_VALUE[f"MAX_{tag}"]), NB2_TYPE[f"MAX_{tag}"]) < CONFIG_DATA[tag]["value"]:  # 当最大值小于设定值时，修改最大值
+            writeMemValue(getMemAddressWithOffset(NB2_VALUE[f"MAX_{tag}"]), CONFIG_DATA[tag]["value"], NB2_TYPE[f"MAX_{tag}"])
     if lock_to_max:
-        if read_double(getMemAddressWithOffset(NB2[f"MAX_{tag}"])) > read_double(
-                getMemAddressWithOffset(NB2[tag])):  # 当值不满时，修改值至最大
-            write_double(getMemAddressWithOffset(NB2[tag]),
-                         read_double(getMemAddressWithOffset(NB2[f"MAX_{tag}"])))
+        if readMemValue(getMemAddressWithOffset(NB2_VALUE[f"MAX_{tag}"]), NB2_TYPE[f"MAX_{tag}"]) > readMemValue(
+                getMemAddressWithOffset(NB2_VALUE[tag]), NB2_TYPE[tag]):  # 当值不满时，修改值至最大
+            writeMemValue(getMemAddressWithOffset(NB2_VALUE[tag]),
+                          readMemValue(getMemAddressWithOffset(NB2_VALUE[f"MAX_{tag}"]), NB2_TYPE[f"MAX_{tag}"]),
+                          NB2_TYPE[tag])
     else:
-        if read_double(getMemAddressWithOffset(NB2[tag])) < CONFIG_DATA[tag]["value"]:  # 当值小于设定时修改值
-            write_double(getMemAddressWithOffset(NB2[tag]), CONFIG_DATA[tag]["value"])
+        if readMemValue(getMemAddressWithOffset(NB2_VALUE[tag]), NB2_TYPE[tag]) < CONFIG_DATA[tag]["value"]:  # 当值小于设定时修改值
+            writeMemValue(getMemAddressWithOffset(NB2_VALUE[tag]), CONFIG_DATA[tag]["value"], NB2_TYPE[tag])
 
 
 def has_min(tag):
     # 当值小于设定时修改值
-    if read_double(getMemAddressWithOffset(NB2[tag])) < CONFIG_DATA[tag]["value"]:
-        write_double(getMemAddressWithOffset(NB2[tag]), CONFIG_DATA[tag]["value"])
+    if readMemValue(getMemAddressWithOffset(NB2_VALUE[tag]), NB2_TYPE[tag]) < CONFIG_DATA[tag]["value"]:
+        writeMemValue(getMemAddressWithOffset(NB2_VALUE[tag]), CONFIG_DATA[tag]["value"], NB2_TYPE[tag])
 
 
 def runOnce():
-    for key in list(default_config_data.keys()):
-        if not has_key(default_config_data[key], "lock"):
+    for key in list(default_config.keys()):
+        if not has_key(default_config[key], "lock"):
             # 不允许锁定的项目
             checkAndSetData(key)
 
 
 def runLoop():
-    for key in list(default_config_data.keys()):
-        if has_key(default_config_data[key], "lock"):  # 允许锁定的项目
-            if has_key(NB2, f"MAX_{key}"):  # 有最大值的
+    for key in list(default_config.keys()):
+        if has_key(default_config[key], "lock"):  # 允许锁定的项目
+            if has_key(NB2_VALUE, f"MAX_{key}"):  # 有最大值的
                 if has_key(CONFIG_DATA, key) and CONFIG_DATA[key]["enable"] and CONFIG_DATA[key]["lock"]:
                     has_max(key, CONFIG_DATA[key]["lock_to_max"] if has_key(CONFIG_DATA[key], "lock_to_max") else True)
             else:  # 没有最大值的
