@@ -204,4 +204,4 @@ if __name__ == "__main__":
     except KeyboardInterrupt:
         onClose()
     except Exception as e:
-        logging.debug(e)
+        a = e

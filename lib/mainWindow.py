@@ -35,6 +35,7 @@ class MainWindow(QMainWindow):
         self.setWindowTitle("霓虹深渊2修改器")
         self.setWindowIcon(QIcon(self.resource_path(os.path.join("resources/", "icon.ico"))))
         self.resize(358, 201)
+        self.setWindowFlags(Qt.WindowStaysOnTopHint)
         self.setFixedSize(self.width(), self.height())
 
         self.curr_cfg = readConfig()
@@ -74,14 +75,14 @@ class MainWindow(QMainWindow):
         self.SpinBox.setMaximum(999)
         self.SpinBox.setMinimum(0)
         self.SpinBox.setVisible(False)
-        self.SpinBox.valueChanged.connect(self.SpinBox_onChange)
+        self.SpinBox.editingFinished.connect(self.SpinBox_onChange)
 
         self.doubleSpinBox = QDoubleSpinBox(self)
         self.doubleSpinBox.setGeometry(240, 169, 62, 22)
         self.doubleSpinBox.setMaximum(1.00)
         self.doubleSpinBox.setMinimum(0.00)
         self.doubleSpinBox.setVisible(False)
-        self.doubleSpinBox.valueChanged.connect(self.doubleSpinBox_onChange)
+        self.doubleSpinBox.editingFinished.connect(self.doubleSpinBox_onChange)
 
         self.checkBoxLockMax = QCheckBox("锁定至最大", self)
         self.checkBoxLockMax.setGeometry(200, 70, 85, 20)
@@ -125,7 +126,7 @@ class MainWindow(QMainWindow):
             if "lock" in self.def_cfg[current_key]:
                 self.checkBoxLock.setChecked(self.curr_cfg[current_key]["lock"])
                 self.checkBoxLock.setVisible(True)
-            if "lock_to_max" in self.def_cfg[current_key]:
+            if "lock_to_max" in self.def_cfg[current_key] and self.checkBoxLock.isChecked():
                 self.checkBoxLockMax.setChecked(self.curr_cfg[current_key]["lock_to_max"])
                 self.checkBoxLockMax.setVisible(True)
             match NB2_TYPE[current_key]:
