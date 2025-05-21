@@ -1,19 +1,40 @@
 import hashlib
 import json
 import os
-import time
+import sys
+import threading
+
+from PyQt5.QtWidgets import QApplication
 
 from lib.core import *
 from lib.default_def import *
+from lib.mainWindow import MainWindow
 
 CONFIG_DATA = None
 
 
 def init():
+    if not os.path.exists(r'.\logs'):
+        os.mkdir(r'.\logs')
+    logging.basicConfig(level=logging.INFO, format='[%(asctime)s][%(levelname)s] %(message)s', handlers=[logging.FileHandler(filename=r'.\logs\log.txt', mode='w', encoding='utf-8')])
     upLog(True)
-    print("\n等待游戏运行...")
+    logging.info("等待游戏运行")
     del_cache()
     checkConfig()
+    t = threading.Thread(target=ui)
+    t.start()
+
+
+def ui():
+    app = QApplication(sys.argv)
+    window = MainWindow()
+    window.show()
+    sys.exit(app.exec_())
+
+
+def onClose():
+    logging.info("程序关闭")
+    return 0
 
 
 def checkConfig():
@@ -37,6 +58,7 @@ def read_cache():
         with open(f'./cache', 'r') as file:
             cx = json.loads(file.read())
             file.close()
+    logging.debug(cx)
     return cx
 
 
@@ -64,7 +86,7 @@ def upLog(k):
     r = "\n"
     for n in uplogs["lines"]:
         r += f"\n{n}"
-    print(f'版本 {uplogs["version"]}{r if k else ""}\n')
+    logging.info(f'\n版本 {uplogs["version"]}{r if k else ""}\n')
 
 
 def has_key(_dict, _key):
@@ -91,7 +113,8 @@ def checkAndSetData(tag):
 def has_max(tag, lock_to_max=True):
     if readMemValue(getMemAddressWithOffset(NB2_VALUE[tag]), NB2_TYPE[tag]) < CONFIG_DATA[tag]["value"]:
         if readMemValue(getMemAddressWithOffset(NB2_VALUE[f"MAX_{tag}"]), NB2_TYPE[f"MAX_{tag}"]) < CONFIG_DATA[tag]["value"]:  # 当最大值小于设定值时，修改最大值
-            writeMemValue(getMemAddressWithOffset(NB2_VALUE[f"MAX_{tag}"]), CONFIG_DATA[tag]["value"], NB2_TYPE[f"MAX_{tag}"])
+            writeMemValue(getMemAddressWithOffset(NB2_VALUE[f"MAX_{tag}"]), CONFIG_DATA[tag]["value"],
+                          NB2_TYPE[f"MAX_{tag}"])
     if lock_to_max:
         if readMemValue(getMemAddressWithOffset(NB2_VALUE[f"MAX_{tag}"]), NB2_TYPE[f"MAX_{tag}"]) > readMemValue(
                 getMemAddressWithOffset(NB2_VALUE[tag]), NB2_TYPE[tag]):  # 当值不满时，修改值至最大
@@ -131,48 +154,54 @@ if __name__ == "__main__":
     init()
     add = fmd5 = None
     tips = ""
-    while True:
-        if check_process_running(EXE_NAME):
-            checkConfig()
+    try:
+        while True:
+            if check_process_running(EXE_NAME):
+                checkConfig()
 
-            stadd = getMemAddressWithOffset()
-            caches = read_cache()
-            if caches is not None:
-                add = caches["start_address"]
-                fmd5 = caches["config_md5"]
+                stadd = getMemAddressWithOffset()
+                caches = read_cache()
+                if caches is not None:
+                    add = caches["start_address"]
+                    fmd5 = caches["config_md5"]
+                else:
+                    add = fmd5 = None
+
+                if fmd5 != file_hash("./config/config.json", hashlib.md5):
+                    CONFIG_DATA = read_config()
+                    tips = f"配置修改已生效"
+                    write_cache(add, file_hash("./config/config.json", hashlib.md5))
+
+                if stadd is not None and stadd != 0x0 and len("0x29B14CCA000") == len(f"0x{stadd:X}"):
+                    if add != stadd:
+                        write_cache(stadd, file_hash("./config/config.json", hashlib.md5))
+                        runOnce()
+                        # print("\033c", end="")
+                        # upLog(False)
+                        logging.info(f"地址段: 0x{getMemAddressWithOffset():X}")
+                        logging.info(f"修改器已启动")
+                        tips = ""
+
+                    if tips != "":
+                        runOnce()
+                        # print("\033c", end="")
+                        # upLog(False)
+                        logging.debug(f"地址段: 0x{getMemAddressWithOffset(): X} {tips}")
+                        logging.info(tips)
+                        tips = ""
+
+                if add is not None and check_process_running(EXE_NAME):
+                    try:
+                        runLoop()
+                    except Exception as e:
+                        a = e
             else:
-                add = fmd5 = None
-
-            if fmd5 != file_hash("./config/config.json", hashlib.md5):
-                CONFIG_DATA = read_config()
-                tips = f"\n[{time.ctime()}]配置修改已生效"
-                write_cache(add, file_hash("./config/config.json", hashlib.md5))
-
-            if stadd is not None and stadd != 0x0 and len("0x29B14CCA000") == len(f"0x{stadd:X}"):
-                if add != stadd:
-                    write_cache(stadd, file_hash("./config/config.json", hashlib.md5))
-                    runOnce()
-                    print("\033c", end="")
-                    upLog(False)
-                    print(f"\n地址段: 0x{getMemAddressWithOffset():X}")
-                    print(f"[{time.ctime()}]修改器已启动")
-                    tips = ""
-
-                if tips != "":
-                    runOnce()
-                    print("\033c", end="")
-                    upLog(False)
-                    print(f"\n地址段: 0x{getMemAddressWithOffset():X}{tips}")
-                    tips = ""
-
-            if add is not None and check_process_running(EXE_NAME):
-                try:
-                    runLoop()
-                except Exception as e:
-                    a = e
-        else:
-            if os.path.exists("./cache"):
-                os.remove("./cache")
-                print("\033c", end="")
-                upLog(False)
-                print("\n等待游戏运行...")
+                if os.path.exists("./cache"):
+                    os.remove("./cache")
+                    # print("\033c", end="")
+                    # upLog(False)
+                    logging.info("等待游戏运行...")
+    except KeyboardInterrupt:
+        onClose()
+    except Exception as e:
+        logging.debug(e)

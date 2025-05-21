@@ -200,22 +200,22 @@ default_config = {
         "value": 0
     },
     "GUN_EXP_PRT": {
-        "_self": "武器升级经验百分比(默认100%,即1.00)",
+        "_self": "武器升级经验百分比",
         "enable": False,
         "value": 1
     },
     "IS_FLY": {
-        "_self": "是否飞行(0=禁用,1=启用)",
+        "_self": "是否飞行",
         "enable": False,
         "value": 0
     },
     "IS_MACHINE_DAMAGE": {
-        "_self": "机器是否损坏(0=禁用,1=启用)",
+        "_self": "机器是否损坏",
         "enable": False,
         "value": 0
     },
     "BOX_WIN_PROB": {
-        "_self": "宝箱获胜概率(默认0%,即0.00)",
+        "_self": "宝箱获胜概率",
         "lock": False,
         "enable": False,
         "value": 0

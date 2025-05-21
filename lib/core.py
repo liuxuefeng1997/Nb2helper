@@ -1,4 +1,5 @@
 import ctypes
+import logging
 from ctypes import wintypes
 import struct
 
@@ -151,7 +152,7 @@ def get_module_base(pid, target_dll):
             psapi.GetModuleBaseNameW(h_process, h_module, base_name, MAX_PATH)
             if base_name.value.lower() == target_dll.lower():
                 return h_module
-        raise RuntimeError(f"模块未找到: {target_dll}")
+        raise logging.error(f"模块未找到: {target_dll}")
     finally:
         kernel32.CloseHandle(h_process)
 
@@ -187,7 +188,7 @@ def read_memory(pid, address, size):
             raise ctypes.WinError(ctypes.get_last_error())
 
         if mbi.Protect & 0xFF in [0, 1, 0x10]:
-            raise ValueError(f"地址 0x{address:X} 不可读")
+            raise logging.error(f"地址 0x{address: X} 不可读")
 
         buffer = ctypes.create_string_buffer(size)
         bytes_read = ctypes.c_size_t()
@@ -227,7 +228,8 @@ def read_pointer_chain(pid, base_address, offsets, is_64bit):
             current_address = int.from_bytes(data, 'little') + offset
             # print(f"[调试] 层级 {idx + 1}: 0x{current_address:X} (偏移 +0x{offset:X})")
         except Exception as e:
-            raise RuntimeError(f"偏移链解析失败于层级 {idx + 1}: {str(e)}")
+            raise RuntimeWarning(f"偏移链解析失败于层级 {idx + 1}: {str(e)}")
+    logging.debug(current_address)
     return current_address
 
 
@@ -250,7 +252,7 @@ def getMemAddress(offsets):
         final_address = read_pointer_chain(pid, start_address, offsets, is_64bit)  # 解析指针链
         return final_address
     except Exception as e:
-        a = e
+        logging.debug(e)
         return None
 
 
@@ -289,7 +291,7 @@ def readMemValue(address, _type="d"):
         case "8b":
             size = 8
         case _:
-            print("[ERROR]type error")
+            logging.error("Mem type error")
             return None
     pid = get_pid_by_name(EXE_NAME)
     data = read_memory(pid, address, size)
