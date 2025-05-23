@@ -1,20 +1,17 @@
+import this
+
 EXE_NAME = "NeonAbyss2.exe"
-uplogs = {
-    "version": "2025.05.23.1018.0034",
+versionInfo = {
+    "version": "2025.05.23.1412.0035",
     "lines": [
         "1、新版本数据变化，正在更新中",
         "2、新增英文语言",
         # "3、修复了一个可能导致程序关闭时弹出警告的问题",
-        "3、更新了版本号",
         "* 注意配置文件差异：可将旧的配置文件备份后删除，让程序创建默认配置以支持新增条目",
     ]
 }
 NB2_DATA = {
-    "_DEFAULT_": {
-        "dll_name": "GameAssembly.dll",
-        "dll_offset": 0x038B6DE8,
-        "offsets": [0xB8, 0x18, 0x598, 0x18, 0x10, 0x18, 0x420, 0x0],
-    },
+    "_DEFAULT_": dict(dll_name="GameAssembly.dll", dll_offset=0x038B6DE8, offsets=[0xB8, 0x18, 0x598, 0x18, 0x10, 0x18, 0x420, 0x10]),
     "GOLD": {
         "dll_name": "GameAssembly.dll",
         "dll_offset": 0x038B6DE8,
@@ -24,23 +21,13 @@ NB2_DATA = {
     "HEALTH": {},  # 血量
     # "MAX_HEALTH": {},  # 血量上限
     "SHIELDS": {},  # 护盾
-    "BOMBER": {
-        "dll_name": "GameAssembly.dll",
-        "dll_offset": 0x038B6DE8,
-        "offsets": [0xB8, 0x18, 0x598, 0x18, 0x50, 0x10, 0x238, 0x10],
-        "valueType": "d"
-    },  # 手雷
+    "BOMBER": {},  # 手雷
     "BOMBER_ICE": {},  # 冰霜手雷
     "BOMBER_FIRE": {},  # 火焰手雷
     "BOMBER_THUNDER": {},  # 雷电手雷
     "BOMBER_DARK": {},  # 暗手雷
     "BOMBER_POISON": {},  # 毒素手雷
-    "KEYS": {
-        "dll_name": "GameAssembly.dll",
-        "dll_offset": 0x038B6DE8,
-        "offsets": [0xB8, 0x18, 0x598, 0x18, 0x18, 0x40, 0x500, 0x10],
-        "valueType": "d"
-    },  # 钥匙
+    "KEYS": {},  # 钥匙
     "MANA": {},  # 水晶
     # "MAX_MANA": {},  # 水晶上限
     "GUN_LEN": {},  # 射程

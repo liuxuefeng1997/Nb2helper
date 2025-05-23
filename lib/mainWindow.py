@@ -17,7 +17,7 @@ class MainWindow(QMainWindow):
         lang = language[self.config["language"]] if "language" in self.config and self.config else language["zh-cn"]
 
         # 设置窗口标题和大小
-        self.setWindowTitle(lang["title"])
+        self.setWindowTitle(f'{lang["title"]} v{versionInfo["version"]}')
         self.setWindowIcon(QIcon(resource_path(os.path.join("resources/", "icon.ico"))))
         self.resize(358, 223)
         self.setWindowFlags(Qt.WindowStaysOnTopHint)
@@ -88,7 +88,7 @@ class MainWindow(QMainWindow):
 
         logging.info("窗口初始化结束")
 
-        self.statusBar.showMessage(f'{lang["wait_game"]}', 5000)
+        self.statusBar.showMessage(f'{lang["wait_game"]}')
         self.listWidget.setCurrentRow(0)
         self.checkVisit(self.listWidget.currentItem().statusTip())
         self.c_key = self.listWidget.currentItem().statusTip()

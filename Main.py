@@ -60,9 +60,9 @@ def delCache():
 
 def upLog(k):
     r = "\n"
-    for n in uplogs["lines"]:
+    for n in versionInfo["lines"]:
         r += f"\n{n}"
-    logging.info(f'\n版本 {uplogs["version"]}{r if k else ""}\n')
+    logging.info(f'\n版本 {versionInfo["version"]}{r if k else ""}\n')
 
 
 def checkAndSetData(tag):
@@ -158,5 +158,4 @@ if __name__ == "__main__":
     except KeyboardInterrupt:
         onClose()
     except Exception as e:
-        logging.debug(f"Main.py：{e}")
         a = e
