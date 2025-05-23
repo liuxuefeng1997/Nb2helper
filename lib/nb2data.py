@@ -1,111 +1,76 @@
-NB2_TYPE = {
-    "GOLD": "d",  # 金币
-    "HEALTH": "d",  # 血量(会暴毙，不推荐使用，可通过修改护盾变相无敌)
-    "MAX_HEALTH": "d",  # 血量上限
-    "SHIELDS": "d",  # 护盾
-    "BOMBER": "d",  # 手雷
-    "BOMBER_ICE": "d",  # 冰霜手雷
-    "BOMBER_FIRE": "d",  # 火焰手雷
-    "BOMBER_THUNDER": "d",  # 雷电手雷
-    "BOMBER_DARK": "d",  # 暗手雷
-    "BOMBER_POISON": "d",  # 毒素手雷
-    "KEYS": "d",  # 钥匙
-    "MANA": "d",  # 水晶
-    "MAX_MANA": "d",  # 水晶上限
-    "GUN_LEN": "d",  # 射程
-    "GUN_SUM": "d",  # 子弹列数
-    "GUN_SPEED": "d",  # 射速
-    "GUN_BOLL": "d",  # 子弹伤害
-    "GUN_LEVEL": "d",  # 武器等级
-    "MOVE_SPEED": "d",  # 移动速度
-    "JUMP_HIGHER": "d",  # 跳跃高度
-    "JUMP_SUM_NO_MARK": "d",  # 无印记跳跃次数
-    "JUMP_SUM": "d",  # 跳跃次数
-    "FIRE_LEVEL": "d",  # 火焰伤害等级
-    "THUNDER_LEVEL": "d",  # 闪电伤害等级
-    "POISON_LEVEL": "d",  # 毒素伤害等级
-    "ICE_LEVEL": "d",  # 冰霜伤害等级
-    "BLAST_LEVEL": "d",  # 爆炸伤害等级
-    "MAGIC_LEVEL": "d",  # 魔法伤害等级
-    "TEC_LEVEL": "d",  # 科技伤害等级
-    "BUBBLE_LEVEL": "d",  # 萌萌伤害等级
-    "PHYSICAL_LEVEL": "d",  # 物理伤害等级
-    "SOUL_LEVEL": "d",  # 暗灵伤害等级
-    "CURSE_LEVEL": "d",  # 诅咒等级
-    "GOLD_SOUL_SUM": "d",  # 金色暗灵数量
-    "TEMP_SOUL_SUM": "d",  # 临时暗灵数量
-    "DAMAGE": "d",  # 受击伤害
-    "KNIFE_SPEED": "d",  # 近战武器攻速
-    "TIME_OF_DAMAGE": "d",  # 伤害持续时间
-    "CRIT_RATE": "d",  # 暴击几率
-    "GUN_EXP_PRT": "f",  # 武器升级经验百分比
-    "IS_FLY": "b",  # 是否飞行
-    "IS_MACHINE_DAMAGE": "b",  # 机器是否损坏
-    "BOX_WIN_PROB": "f"  # 宝箱获胜概率
-}
-# d: 双浮点; f: 单浮点; b: 字节; 4b: 4字节
-NB2_VALUE = {
-    "GOLD": [0x20, 0x18, 0x10, 0x18, 0x210],  # 金币
-    "HEALTH": [0x20, 0x18, 0x10, 0x18, 0x258],  # 血量(会暴毙，不推荐使用，可通过修改护盾变相无敌)
-    "MAX_HEALTH": [0x20, 0x18, 0x10, 0x18, 0x588],  # 血量上限
-    "SHIELDS": [0x20, 0x18, 0x10, 0x18, 0x288],  # 护盾
-    "BOMBER": [0x20, 0x18, 0x10, 0x18, 0x2A0],  # 手雷
-    "BOMBER_ICE": [0x20, 0x18, 0x10, 0x18, 0x438],  # 冰霜手雷
-    "BOMBER_FIRE": [0x20, 0x18, 0x10, 0x18, 0xC18],  # 火焰手雷
-    "BOMBER_THUNDER": [0x20, 0x18, 0x10, 0x18, 0x8E8],  # 雷电手雷
-    "BOMBER_DARK": [0x20, 0x18, 0x10, 0x18, 0x540],  # 暗手雷
-    "BOMBER_POISON": [0x20, 0x18, 0x10, 0x18, 0x1128],  # 毒素手雷
-    "KEYS": [0x20, 0x18, 0x10, 0x18, 0x4F8],  # 钥匙
-    "MANA": [0x20, 0x18, 0x10, 0x18, 0x270],  # 水晶
-    "MAX_MANA": [0x20, 0x18, 0x10, 0x18, 0x5B8],  # 水晶上限
-    "GUN_LEN": [0x20, 0x18, 0x10, 0x18, 0x198],  # 射程
-    "GUN_SUM": [0x20, 0x18, 0x10, 0x18, 0x168],  # 子弹列数
-    "GUN_SPEED": [0x20, 0x18, 0x10, 0x18, 0x1C8],  # 射速
-    "GUN_BOLL": [0x20, 0x18, 0x10, 0x18, 0x180],  # 子弹伤害
-    "GUN_LEVEL": [0x20, 0x18, 0x10, 0x18, 0x13E0],  # 武器等级
-    "MOVE_SPEED": [0x20, 0x18, 0x10, 0x18, 0x6A8],  # 移动速度
-    "JUMP_HIGHER": [0x20, 0x18, 0x10, 0x18, 0x4C8],  # 跳跃高度
-    "JUMP_SUM_NO_MARK": [0x20, 0x18, 0x10, 0x18, 0x1488],  # 无印记跳跃次数
-    "JUMP_SUM": [0x20, 0x18, 0x10, 0x18, 0x6D8],  # 跳跃次数
-    "FIRE_LEVEL": [0x20, 0x18, 0x10, 0x18, 0x1038],  # 火焰伤害等级
-    "THUNDER_LEVEL": [0x20, 0x18, 0x10, 0x18, 0x1050],  # 闪电伤害等级
-    "POISON_LEVEL": [0x20, 0x18, 0x10, 0x18, 0x1068],  # 毒素伤害等级
-    "ICE_LEVEL": [0x20, 0x18, 0x10, 0x18, 0x1080],  # 冰霜伤害等级
-    "BLAST_LEVEL": [0x20, 0x18, 0x10, 0x18, 0x1140],  # 爆炸伤害等级
-    "MAGIC_LEVEL": [0x20, 0x18, 0x10, 0x18, 0x1248],  # 魔法伤害等级
-    "TEC_LEVEL": [0x20, 0x18, 0x10, 0x18, 0xF18],  # 科技伤害等级
-    "BUBBLE_LEVEL": [0x20, 0x18, 0x10, 0x18, 0x14A0],  # 萌萌伤害等级
-    "PHYSICAL_LEVEL": [0x20, 0x18, 0x10, 0x18, 0x660],  # 物理伤害等级
-    "SOUL_LEVEL": [0x20, 0x18, 0x10, 0x18, 0x1980],  # 暗灵伤害等级
-    "CURSE_LEVEL": [0x20, 0x18, 0x10, 0x18, 0x1110],  # 诅咒等级
-    "GOLD_SOUL_SUM": [0x20, 0x18, 0x10, 0x18, 0x19E0],  # 金色暗灵数量
-    "TEMP_SOUL_SUM": [0x20, 0x18, 0x10, 0x18, 0x19F8],  # 临时暗灵数量
-    "DAMAGE": [0x20, 0x18, 0x10, 0x18, 0x2E8],  # 受击伤害
-    "KNIFE_SPEED": [0x20, 0x18, 0x10, 0x18, 0xE28],  # 近战武器攻速
-    "TIME_OF_DAMAGE": [0x20, 0x18, 0x10, 0x18, 0x1200],  # 伤害持续时间
-    "CRIT_RATE": [0x20, 0x18, 0x10, 0x18, 0x15F0],  # 暴击几率
-    "GUN_EXP_PRT": [0x180, 0x310, 0x468],  # 武器升级经验百分比
-    "IS_FLY": [0x180, 0x310, 0x45E],  # 是否飞行
-    "IS_MACHINE_DAMAGE": [0x180, 0x310, 0x451],  # 机器是否损坏
-    "BOX_WIN_PROB": [0x180, 0x310, 0x438]  # 宝箱获胜概率
-}
 EXE_NAME = "NeonAbyss2.exe"
-DLL_NAME = "UnityPlayer.dll"
-DLL_OFFSET = 0x01C9D460
-MEM_OFFSETS = [0x8, 0x10, 0x28, 0x50]
 uplogs = {
-    "version": "2025.05.21.1504.0033",
+    "version": "2025.05.23.1018.0034",
     "lines": [
-        "1、修复了锁定至最大值在未开启锁定时错误的显示的问题",
-        "2、修复了数值修改框输入失焦的问题",
-        "3、修复了一个可能导致程序关闭时弹出警告的问题",
-        "4、更新了版本号",
+        "1、新版本数据变化，正在更新中",
+        "2、新增英文语言",
+        # "3、修复了一个可能导致程序关闭时弹出警告的问题",
+        "3、更新了版本号",
         "* 注意配置文件差异：可将旧的配置文件备份后删除，让程序创建默认配置以支持新增条目",
-        "",
-        "使用提示：",
-        "1、程序会自动检测配置文件更改，修改配置文件即可使修改生效",
-        "2、修改配置时务必注意不要破坏文件结构，否则可能导致错误，可使用包内JSON编辑器以避免出现问题",
-        "3、程序首次运行会自动创建默认配置文件，并且每次启动都会创建一个最新的模板",
-        "4、锁定至最大值开关说明（\"lock_to_max\": true|false）默认为true，关闭时锁定至设定值"
     ]
+}
+NB2_DATA = {
+    "_DEFAULT_": {
+        "dll_name": "GameAssembly.dll",
+        "dll_offset": 0x038B6DE8,
+        "offsets": [0xB8, 0x18, 0x598, 0x18, 0x10, 0x18, 0x420, 0x0],
+    },
+    "GOLD": {
+        "dll_name": "GameAssembly.dll",
+        "dll_offset": 0x038B6DE8,
+        "offsets": [0xB8, 0x18, 0x598, 0x18, 0x10, 0x18, 0x420, 0x10],
+        "valueType": "d"
+    },  # 金币
+    "HEALTH": {
+        "dll_name": "GameAssembly.dll",
+        "dll_offset": 0x038B6DE8,
+        "offsets": [0xB8, 0x18, 0x598, 0x18, 0x10, 0x18, 0x420, -0x130],
+        "valueType": "d"
+    },  # 血量
+    # "MAX_HEALTH": {},  # 血量上限
+    "SHIELDS": {},  # 护盾
+    "BOMBER": {},  # 手雷
+    "BOMBER_ICE": {},  # 冰霜手雷
+    "BOMBER_FIRE": {},  # 火焰手雷
+    "BOMBER_THUNDER": {},  # 雷电手雷
+    "BOMBER_DARK": {},  # 暗手雷
+    "BOMBER_POISON": {},  # 毒素手雷
+    "KEYS": {},  # 钥匙
+    "MANA": {
+        "dll_name": "GameAssembly.dll",
+        "dll_offset": 0x038B6DE8,
+        "offsets": [0xB8, 0x18, 0x598, 0x18, 0x10, 0x18, 0x420, -0x1F0],
+        "valueType": "d"
+    },  # 水晶
+    # "MAX_MANA": {},  # 水晶上限
+    "GUN_LEN": {},  # 射程
+    "GUN_SUM": {},  # 子弹列数
+    "GUN_SPEED": {},  # 射速
+    "GUN_BOLL": {},  # 子弹伤害
+    "GUN_LEVEL": {},  # 武器等级
+    "MOVE_SPEED": {},  # 移动速度
+    "JUMP_HIGHER": {},  # 跳跃高度
+    "JUMP_SUM_NO_MARK": {},  # 无印记跳跃次数
+    "JUMP_SUM": {},  # 跳跃次数
+    "FIRE_LEVEL": {},  # 火焰伤害等级
+    "THUNDER_LEVEL": {},  # 闪电伤害等级
+    "POISON_LEVEL": {},  # 毒素伤害等级
+    "ICE_LEVEL": {},  # 冰霜伤害等级
+    "BLAST_LEVEL": {},  # 爆炸伤害等级
+    "MAGIC_LEVEL": {},  # 魔法伤害等级
+    "TEC_LEVEL": {},  # 科技伤害等级
+    "BUBBLE_LEVEL": {},  # 萌萌伤害等级
+    "PHYSICAL_LEVEL": {},  # 物理伤害等级
+    "SOUL_LEVEL": {},  # 暗灵伤害等级
+    "CURSE_LEVEL": {},  # 诅咒等级
+    "GOLD_SOUL_SUM": {},  # 金色暗灵数量
+    "TEMP_SOUL_SUM": {},  # 临时暗灵数量
+    "DAMAGE": {},  # 受击伤害
+    "KNIFE_SPEED": {},  # 近战武器攻速
+    "TIME_OF_DAMAGE": {},  # 伤害持续时间
+    "CRIT_RATE": {},  # 暴击几率
+    "GUN_EXP_PRT": {},  # 武器升级经验百分比
+    "IS_FLY": {},  # 是否飞行
+    "IS_MACHINE_DAMAGE": {},  # 机器是否损坏
+    "BOX_WIN_PROB": {}  # 宝箱获胜概率
 }

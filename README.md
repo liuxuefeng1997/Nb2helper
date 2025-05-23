@@ -4,8 +4,8 @@
 # 已实现功能
 | 属性名          | 说明         | 属性名           | 说明             |
 |-----------------|--------------|------------------|------------------|
-| GOLD            | 金币         | GUN_SPEED        | 射速             |
-| HEALTH          | 血量         | GUN_BOLL         | 子弹伤害         |
+| GOLD            | 金币 ✅        | GUN_SPEED        | 射速             |
+| HEALTH          | 血量 ✅        | GUN_BOLL         | 子弹伤害         |
 | MAX_HEALTH      | 血量上限     | GUN_LEVEL        | 武器等级         |
 | SHIELDS         | 护盾         | MOVE_SPEED       | 移动速度         |
 | BOMBER          | 手雷         | JUMP_HIGHER      | 跳跃高度         |
@@ -15,7 +15,7 @@
 | BOMBER_DARK     | 暗手雷       | THUNDER_LEVEL    | 闪电伤害等级     |
 | BOMBER_POISON   | 毒素手雷     | POISON_LEVEL     | 毒素伤害等级     |
 | KEYS            | 钥匙         | ICE_LEVEL        | 冰霜伤害等级     |
-| MANA            | 水晶         | BLAST_LEVEL      | 爆炸伤害等级     |
+| MANA            | 水晶 ✅        | BLAST_LEVEL      | 爆炸伤害等级     |
 | MAX_MANA        | 水晶上限     | MAGIC_LEVEL      | 魔法伤害等级     |
 | GUN_LEN         | 射程         | TEC_LEVEL        | 科技伤害等级     |
 | GUN_SUM         | 子弹列数     | BUBBLE_LEVEL     | 萌萌伤害等级     |

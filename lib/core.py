@@ -1,11 +1,6 @@
 import ctypes
 import logging
 from ctypes import wintypes
-import struct
-
-import psutil
-
-from lib.nb2data import *
 
 # ------------------- 常量定义 -------------------
 
@@ -152,7 +147,7 @@ def get_module_base(pid, target_dll):
             psapi.GetModuleBaseNameW(h_process, h_module, base_name, MAX_PATH)
             if base_name.value.lower() == target_dll.lower():
                 return h_module
-        raise logging.error(f"模块未找到: {target_dll}")
+        logging.debug(f"模块未找到: {target_dll}")
     finally:
         kernel32.CloseHandle(h_process)
 
@@ -217,10 +212,10 @@ def write_memory(pid, address, data):
         kernel32.CloseHandle(h_process)
 
 
-def read_pointer_chain(pid, base_address, offsets, is_64bit):
+def read_pointer_chain(pid, base_address, offsets):
     """读取指针链"""
     current_address = base_address
-    ptr_size = 8 if is_64bit else 4
+    ptr_size = 8 if is_64bit_process(pid) else 4
 
     for idx, offset in enumerate(offsets):
         try:
@@ -228,71 +223,6 @@ def read_pointer_chain(pid, base_address, offsets, is_64bit):
             current_address = int.from_bytes(data, 'little') + offset
             # print(f"[调试] 层级 {idx + 1}: 0x{current_address:X} (偏移 +0x{offset:X})")
         except Exception as e:
+            logging.debug(f"偏移链解析失败于层级 {idx + 1}: {str(e)}")
             raise RuntimeWarning(f"偏移链解析失败于层级 {idx + 1}: {str(e)}")
-    logging.debug(current_address)
     return current_address
-
-
-def get_pid_by_name(process_name):
-    pid = None
-    for proc in psutil.process_iter(attrs=['pid', 'name']):
-        if proc.info['name'] == process_name:
-            pid = proc.info['pid']
-            break
-    return pid
-
-
-def getMemAddress(offsets):
-    # 目标进程ID
-    pid = get_pid_by_name(EXE_NAME)
-    try:
-        is_64bit = is_64bit_process(pid)  # 获取进程信息
-        dll_base = get_module_base(pid, DLL_NAME)  # 获取DLL基址
-        start_address = dll_base + DLL_OFFSET  # 计算初始地址
-        final_address = read_pointer_chain(pid, start_address, offsets, is_64bit)  # 解析指针链
-        return final_address
-    except Exception as e:
-        logging.debug(e)
-        return None
-
-
-def getMemAddressWithOffset(offset=None):
-    if offset is None:
-        offset = [0x20, 0x18, 0x10, 0x18, 0x0]
-    n = MEM_OFFSETS + offset
-    return getMemAddress(n)
-
-
-def check_process_running(process_name):
-    for process in psutil.process_iter(['name']):
-        if process.info['name'] == process_name:
-            return True
-    return False
-
-
-def writeMemValue(address, value, _type="d"):
-    pid = get_pid_by_name(EXE_NAME)
-    data = struct.pack(f'<{_type}', value)
-    return write_memory(pid, address, data)
-
-
-def readMemValue(address, _type="d"):
-    match _type:
-        case "d":
-            size = 8
-        case "f":
-            size = 4
-        case "b":
-            size = 1
-        case "2b":
-            size = 2
-        case "4b":
-            size = 4
-        case "8b":
-            size = 8
-        case _:
-            logging.error("Mem type error")
-            return None
-    pid = get_pid_by_name(EXE_NAME)
-    data = read_memory(pid, address, size)
-    return struct.unpack(f'<{_type}', data)[0]
