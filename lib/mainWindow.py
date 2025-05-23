@@ -88,6 +88,7 @@ class MainWindow(QMainWindow):
 
         logging.info("窗口初始化结束")
 
+        self.statusBar.showMessage(f'{lang["wait_game"]}', 5000)
         self.listWidget.setCurrentRow(0)
         self.checkVisit(self.listWidget.currentItem().statusTip())
         self.c_key = self.listWidget.currentItem().statusTip()
@@ -97,7 +98,6 @@ class MainWindow(QMainWindow):
         sys.exit(0)
 
     def checkVisit(self, current_key=None):
-        logging.debug(f'{current_key}: {self.curr_cfg[current_key]} - {current_key in NB2_DATA}')
         self.checkBoxEnable.setVisible(False)
         self.checkBoxLock.setVisible(False)
         self.checkBoxLockMax.setVisible(False)
@@ -165,7 +165,9 @@ class MainWindow(QMainWindow):
         item = self.listWidget.currentItem()
         current_text = f'{item.text()}'
         current_key = f'{item.statusTip()}'
-        self.statusBar.showMessage(f'{current_text}: {readMemValue(getMemAddress(current_key), current_key)}', 3000)
+        logging.debug(f'{current_text}：{current_key}')
+        if getMemAddress(current_key) is not None:
+            self.statusBar.showMessage(f'{current_text}: {readMemValue(getMemAddress(current_key), current_key)}', 5000)
         self.c_key = current_key
         logging.info(f"{current_text} {current_key}: {self.curr_cfg[current_key]}")
         self.checkVisit(current_key)

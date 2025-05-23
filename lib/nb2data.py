@@ -35,7 +35,12 @@ NB2_DATA = {
     "BOMBER_THUNDER": {},  # 雷电手雷
     "BOMBER_DARK": {},  # 暗手雷
     "BOMBER_POISON": {},  # 毒素手雷
-    "KEYS": {},  # 钥匙
+    "KEYS": {
+        "dll_name": "GameAssembly.dll",
+        "dll_offset": 0x038B6DE8,
+        "offsets": [0xB8, 0x18, 0x598, 0x18, 0x18, 0x40, 0x500, 0x10],
+        "valueType": "d"
+    },  # 钥匙
     "MANA": {},  # 水晶
     # "MAX_MANA": {},  # 水晶上限
     "GUN_LEN": {},  # 射程

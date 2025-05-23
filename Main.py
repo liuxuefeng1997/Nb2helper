@@ -1,4 +1,5 @@
 import hashlib
+import logging
 from threading import Thread
 
 from PyQt5.QtWidgets import QApplication
@@ -157,4 +158,5 @@ if __name__ == "__main__":
     except KeyboardInterrupt:
         onClose()
     except Exception as e:
+        logging.debug(f"Main.py：{e}")
         a = e

@@ -1,6 +1,7 @@
 language = {
     "zh-cn": {
         "title": "Neon Abyss 2 修改器",
+        "wait_game": "等待启动游戏",
         "enable": "启用",
         "lock": "锁定",
         "lockMax": "锁定至最大",
@@ -50,6 +51,7 @@ language = {
     },
     "en-us": {
         "title": "Neon Abyss 2 Helper",
+        "wait_game": "Wait game start ...",
         "enable": "Enable",
         "lock": "Lock",
         "lockMax": "Lock to Max",
