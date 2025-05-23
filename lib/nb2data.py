@@ -24,7 +24,12 @@ NB2_DATA = {
     "HEALTH": {},  # 血量
     # "MAX_HEALTH": {},  # 血量上限
     "SHIELDS": {},  # 护盾
-    "BOMBER": {},  # 手雷
+    "BOMBER": {
+        "dll_name": "GameAssembly.dll",
+        "dll_offset": 0x038B6DE8,
+        "offsets": [0xB8, 0x18, 0x598, 0x18, 0x50, 0x10, 0x238, 0x10],
+        "valueType": "d"
+    },  # 手雷
     "BOMBER_ICE": {},  # 冰霜手雷
     "BOMBER_FIRE": {},  # 火焰手雷
     "BOMBER_THUNDER": {},  # 雷电手雷
