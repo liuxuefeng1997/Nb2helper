@@ -26,8 +26,6 @@ def fileHash(file_path: str, hash_method) -> str:
 def checkConfig():
     if not os.path.exists("./config"):
         os.mkdir("./config")
-    if not os.path.exists("./data"):
-        os.mkdir("./data")
     writeConfig(default_config, isTemple=True)
     if not os.path.exists("./config/config.json"):
         writeConfig(default_config)
