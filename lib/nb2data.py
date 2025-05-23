@@ -21,12 +21,7 @@ NB2_DATA = {
         "offsets": [0xB8, 0x18, 0x598, 0x18, 0x10, 0x18, 0x420, 0x10],
         "valueType": "d"
     },  # 金币
-    "HEALTH": {
-        "dll_name": "GameAssembly.dll",
-        "dll_offset": 0x038B6DE8,
-        "offsets": [0xB8, 0x18, 0x598, 0x18, 0x10, 0x18, 0x420, -0x130],
-        "valueType": "d"
-    },  # 血量
+    "HEALTH": {},  # 血量
     # "MAX_HEALTH": {},  # 血量上限
     "SHIELDS": {},  # 护盾
     "BOMBER": {},  # 手雷
@@ -36,12 +31,7 @@ NB2_DATA = {
     "BOMBER_DARK": {},  # 暗手雷
     "BOMBER_POISON": {},  # 毒素手雷
     "KEYS": {},  # 钥匙
-    "MANA": {
-        "dll_name": "GameAssembly.dll",
-        "dll_offset": 0x038B6DE8,
-        "offsets": [0xB8, 0x18, 0x598, 0x18, 0x10, 0x18, 0x420, -0x1F0],
-        "valueType": "d"
-    },  # 水晶
+    "MANA": {},  # 水晶
     # "MAX_MANA": {},  # 水晶上限
     "GUN_LEN": {},  # 射程
     "GUN_SUM": {},  # 子弹列数
