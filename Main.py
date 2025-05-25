@@ -8,6 +8,7 @@ from lib.exlibrary import *
 from lib.mainWindow import MainWindow
 
 CONFIG_DATA = None
+FLAG = False
 
 
 def init():
@@ -138,6 +139,7 @@ if __name__ == "__main__":
                         runOnce()
                         logging.info(f"地址段: 0x{getMemAddress():X}")
                         logging.info(f"修改器已启动")
+                        FLAG = True
                         tips = ""
 
                     if tips != "":
@@ -153,6 +155,7 @@ if __name__ == "__main__":
                         a = e
             else:
                 if os.path.exists("./cache"):
+                    FLAG = False
                     os.remove("./cache")
                     logging.info("等待游戏运行...")
     except KeyboardInterrupt:

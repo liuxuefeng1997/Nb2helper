@@ -88,7 +88,7 @@ class MainWindow(QMainWindow):
 
         logging.info("窗口初始化结束")
 
-        self.statusBar.showMessage(f'{lang["wait_game"]}')
+        self.statusBar.showMessage(f'{lang["wait_game"]}', 5000)
         self.listWidget.setCurrentRow(0)
         self.checkVisit(self.listWidget.currentItem().statusTip())
         self.c_key = self.listWidget.currentItem().statusTip()

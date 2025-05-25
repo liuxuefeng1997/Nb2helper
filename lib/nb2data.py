@@ -2,7 +2,7 @@ import this
 
 EXE_NAME = "NeonAbyss2.exe"
 versionInfo = {
-    "version": "2025.05.23.1412.0035",
+    "version": "2025.05.26.0440.0036.beta",
     "lines": [
         "1、新版本数据变化，正在更新中",
         "2、新增英文语言",
@@ -11,25 +11,55 @@ versionInfo = {
     ]
 }
 NB2_DATA = {
-    "_DEFAULT_": dict(dll_name="GameAssembly.dll", dll_offset=0x038B6DE8, offsets=[0xB8, 0x18, 0x598, 0x18, 0x10, 0x18, 0x420, 0x10]),
+    "_DEFAULT_": dict(dll_name="UnityPlayer.dll", dll_offset=0x01C87660, offsets=[0x8, 0x90, 0x60, 0x68, 0x20, 0x18, 0x10, 0x18, 0x0]),
     "GOLD": {
-        "dll_name": "GameAssembly.dll",
-        "dll_offset": 0x038B6DE8,
-        "offsets": [0xB8, 0x18, 0x598, 0x18, 0x10, 0x18, 0x420, 0x10],
+        "dll_name": "UnityPlayer.dll",
+        "dll_offset": 0x01C87660,
+        "offsets": [0x8, 0x90, 0x60, 0x68, 0x20, 0x18, 0x10, 0x18, 0x420, 0x10],
         "valueType": "d"
     },  # 金币
-    "HEALTH": {},  # 血量
-    # "MAX_HEALTH": {},  # 血量上限
-    "SHIELDS": {},  # 护盾
-    "BOMBER": {},  # 手雷
-    "BOMBER_ICE": {},  # 冰霜手雷
-    "BOMBER_FIRE": {},  # 火焰手雷
-    "BOMBER_THUNDER": {},  # 雷电手雷
-    "BOMBER_DARK": {},  # 暗手雷
-    "BOMBER_POISON": {},  # 毒素手雷
-    "KEYS": {},  # 钥匙
-    "MANA": {},  # 水晶
-    # "MAX_MANA": {},  # 水晶上限
+    "HEALTH": {
+        "dll_name": "UnityPlayer.dll",
+        "dll_offset": 0x01C87660,
+        "offsets": [0x8, 0x90, 0x60, 0x68, 0x20, 0x18, 0x10, 0x18, 0x540, 0x10],
+        "valueType": "d"
+    },  # 血量
+    "MAX_HEALTH": {
+        "dll_name": "UnityPlayer.dll",
+        "dll_offset": 0x01C87660,
+        "offsets": [0x8, 0x90, 0x60, 0x68, 0x20, 0x18, 0x10, 0x18, 0x11E8, 0x10],
+        "valueType": "d"
+    },  # 血量上限
+    "SHIELDS": {
+        "dll_name": "UnityPlayer.dll",
+        "dll_offset": 0x01C87660,
+        "offsets": [0x8, 0x90, 0x60, 0x68, 0x20, 0x18, 0x10, 0x18, 0x570, 0x10],
+        "valueType": "d"
+    },  # 护盾
+    "BOMBER": {
+        "dll_name": "UnityPlayer.dll",
+        "dll_offset": 0x01C87660,
+        "offsets": [0x8, 0x90, 0x60, 0x68, 0x20, 0x18, 0x10, 0x18, 0x678, 0x10],
+        "valueType": "d"
+    },  # 手雷
+    "KEYS": {
+        "dll_name": "UnityPlayer.dll",
+        "dll_offset": 0x01C87660,
+        "offsets": [0x8, 0x90, 0x60, 0x68, 0x20, 0x18, 0x10, 0x18, 0xED0, 0x10],
+        "valueType": "d"
+    },  # 钥匙
+    "MANA": {
+        "dll_name": "UnityPlayer.dll",
+        "dll_offset": 0x01C87660,
+        "offsets": [0x8, 0x90, 0x60, 0x68, 0x20, 0x18, 0x10, 0x18, 0x558, 0x10],
+        "valueType": "d"
+    },  # 水晶
+    "MAX_MANA": {
+        "dll_name": "UnityPlayer.dll",
+        "dll_offset": 0x01C87660,
+        "offsets": [0x8, 0x90, 0x60, 0x68, 0x20, 0x18, 0x10, 0x18, 0x1230, 0x10],
+        "valueType": "d"
+    },  # 水晶上限
     "GUN_LEN": {},  # 射程
     "GUN_SUM": {},  # 子弹列数
     "GUN_SPEED": {},  # 射速

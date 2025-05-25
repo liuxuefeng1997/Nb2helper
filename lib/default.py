@@ -8,58 +8,33 @@ default_config = {
         "enable": False,
         "value": 199
     },
-    # "KEYS": {
-    #     "lock": False,
-    #     "enable": False,
-    #     "value": 9
-    # },
-    # "BOMBER": {
-    #     "lock": False,
-    #     "enable": False,
-    #     "value": 9
-    # },
-    # "BOMBER_ICE": {
-    #     "lock": False,
-    #     "enable": False,
-    #     "value": 9
-    # },
-    # "BOMBER_FIRE": {
-    #     "lock": False,
-    #     "enable": False,
-    #     "value": 9
-    # },
-    # "BOMBER_THUNDER": {
-    #     "lock": False,
-    #     "enable": False,
-    #     "value": 9
-    # },
-    # "BOMBER_DARK": {
-    #     "lock": False,
-    #     "enable": False,
-    #     "value": 9
-    # },
-    # "BOMBER_POISON": {
-    #     "lock": False,
-    #     "enable": False,
-    #     "value": 9
-    # },
-    # "MANA": {
-    #     "lock": False,
-    #     "lock_to_max": True,
-    #     "enable": False,
-    #     "value": 5
-    # },
-    # "SHIELDS": {
-    #     "lock": False,
-    #     "enable": False,
-    #     "value": 0
-    # },
-    # "HEALTH": {
-    #     "lock": False,
-    #     "lock_to_max": True,
-    #     "enable": False,
-    #     "value": 8
-    # },
+    "KEYS": {
+        "lock": False,
+        "enable": False,
+        "value": 9
+    },
+    "BOMBER": {
+        "lock": False,
+        "enable": False,
+        "value": 9
+    },
+    "MANA": {
+        "lock": False,
+        "lock_to_max": True,
+        "enable": False,
+        "value": 5
+    },
+    "SHIELDS": {
+        "lock": False,
+        "enable": False,
+        "value": 0
+    },
+    "HEALTH": {
+        "lock": False,
+        "lock_to_max": True,
+        "enable": False,
+        "value": 8
+    },
     # "GUN_LEN": {
     #     "enable": False,
     #     "value": 1

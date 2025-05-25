@@ -86,7 +86,7 @@ def getMemAddress(tag=None):
         logging.error("游戏未运行")
         return None
     try:
-        start_address = get_module_base(pid, memInfo["dll_name"]) + memInfo["dll_offset"]  # 计算初始地址
+        start_address = getBaseOffset(memInfo["dll_name"], memInfo["dll_offset"])  # 计算初始地址
         final_address = read_pointer_chain(pid, start_address, offsets)  # 解析指针链
         return final_address
     except Exception as e:
@@ -147,3 +147,7 @@ def resource_path(relative_path):
         base_path = "./"
     ret_path = os.path.join(base_path, relative_path)
     return ret_path
+
+
+def getBaseOffset(dll_name, dll_offset):
+    return get_module_base(getPID(EXE_NAME), dll_name) + dll_offset
