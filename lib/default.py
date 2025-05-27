@@ -31,29 +31,9 @@ default_config = {
         "enable": False,
         "value": 8
     },
-    "GUN_LEN": {
-        "enable": False,
-        "value": 1
-    },
     "GUN_SPEED": {
         "enable": False,
         "value": 1
-    },
-    "GUN_SUM": {
-        "enable": False,
-        "value": 1
-    },
-    "MOVE_SPEED": {
-        "enable": False,
-        "value": 11
-    },
-    "JUMP_HIGHER": {
-        "enable": False,
-        "value": 95
-    },
-    "JUMP_SUM": {
-        "enable": False,
-        "value": 0
     },
 }
 default_ui = {

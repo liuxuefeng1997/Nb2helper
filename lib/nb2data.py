@@ -5,8 +5,7 @@ versionInfo = {
     "version": "2025.05.27.2306.0037.beta",
     "lines": [
         "1、为新版本游戏提供支持",
-        # "2、新增英文语言",
-        # "3、修复了一个可能导致程序关闭时弹出警告的问题",
+        "2、移除修改无效的项目",
         "* 注意配置文件差异：可将旧的配置文件备份后删除，让程序创建默认配置以支持新增条目",
     ]
 }
@@ -60,40 +59,10 @@ NB2_DATA = {
         "offsets": [0x8, 0x90, 0x60, 0x68, 0x20, 0x18, 0x10, 0x18, 0x1230, 0x10],
         "valueType": "d"
     },  # 水晶上限
-    "GUN_LEN": {
-        "dll_name": "UnityPlayer.dll",
-        "dll_offset": 0x01C87660,
-        "offsets": [0x8, 0x90, 0x60, 0x68, 0x20, 0x18, 0x10, 0x18, 0x360, 0x10],
-        "valueType": "d"
-    },  # 射程
-    "GUN_SUM": {
-        "dll_name": "UnityPlayer.dll",
-        "dll_offset": 0x01C87660,
-        "offsets": [0x8, 0x90, 0x60, 0x68, 0x20, 0x18, 0x10, 0x18, 0x318, 0x10],
-        "valueType": "d"
-    },  # 子弹列数
     "GUN_SPEED": {
         "dll_name": "UnityPlayer.dll",
         "dll_offset": 0x01C87660,
         "offsets": [0x8, 0x90, 0x60, 0x68, 0x20, 0x18, 0x10, 0x18, 0x390, 0x10],
         "valueType": "d"
     },  # 射速
-    "MOVE_SPEED": {
-        "dll_name": "UnityPlayer.dll",
-        "dll_offset": 0x01C87660,
-        "offsets": [0x8, 0x90, 0x60, 0x68, 0x20, 0x18, 0x10, 0x18, 0x14B8, 0x10],
-        "valueType": "d"
-    },  # 移动速度
-    "JUMP_HIGHER": {
-        "dll_name": "UnityPlayer.dll",
-        "dll_offset": 0x01C87660,
-        "offsets": [0x8, 0x90, 0x60, 0x68, 0x20, 0x18, 0x10, 0x18, 0xE10, 0x10],
-        "valueType": "d"
-    },  # 跳跃高度
-    "JUMP_SUM": {
-        "dll_name": "UnityPlayer.dll",
-        "dll_offset": 0x01C87660,
-        "offsets": [0x8, 0x90, 0x60, 0x68, 0x20, 0x18, 0x10, 0x18, 0x1A28, 0x10],
-        "valueType": "d"
-    },  # 跳跃次数
 }
