@@ -7,7 +7,7 @@
 | GOLD            | 金币        | ✅       | GUN_SPEED        | 射速             | ✅         |
 | HEALTH          | 血量        | ✅       | MOVE_SPEED       | 移动速度          | ✅         |
 | MAX_HEALTH      | 血量上限     | ✅       | JUMP_HIGHER      | 跳跃高度          | ✅         |
-| SHIELDS         | 护盾        | ✅       | JUMP_SUM         | 跳跃次数          | ✅         |
+| SHIELDS         | 护盾        | ✅       | JUMP_SUM         | 跳跃次数          |           |
 | BOMBER          | 手雷        | ✅       | GUN_LEN          | 射程             | ✅         |
 | KEYS            | 钥匙         | ✅       | GUN_SUM          | 子弹列数          | ✅         |
 | MANA            | 水晶         | ✅       | MAX_MANA         | 水晶上限          | ✅         |
