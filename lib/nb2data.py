@@ -1,5 +1,3 @@
-import this
-
 EXE_NAME = "NeonAbyss2.exe"
 versionInfo = {
     "version": "2025.05.27.2358.0038",
