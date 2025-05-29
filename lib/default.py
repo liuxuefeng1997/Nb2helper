@@ -16,7 +16,7 @@ default_config = {
     },
     "MANA": {
         "lock": False,
-        "lock_to_max": True,
+        "lock_to_max": False,
         "enable": False,
         "value": 5
     },
@@ -27,7 +27,7 @@ default_config = {
     },
     "HEALTH": {
         "lock": False,
-        "lock_to_max": True,
+        "lock_to_max": False,
         "enable": False,
         "value": 8
     },
