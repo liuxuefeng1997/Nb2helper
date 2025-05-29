@@ -1,5 +1,6 @@
 import hashlib
 import logging
+import time
 from threading import Thread
 
 from PyQt5.QtWidgets import QApplication
@@ -12,10 +13,11 @@ FLAG = False
 
 
 def init():
+    NOW_TIME_WITH_NO_SPACE = time.strftime('%Y%m%d_%H%M%S', time.localtime(time.time()))
     if getattr(sys, 'frozen', False):
         if not os.path.exists(r'.\logs'):
             os.mkdir(r'.\logs')
-        logging.basicConfig(level=logging.INFO, format='[%(asctime)s][%(levelname)s] %(message)s', handlers=[logging.FileHandler(filename=r'.\logs\log.txt', mode='w', encoding='utf-8')])
+        logging.basicConfig(level=logging.INFO, format='[%(asctime)s][%(levelname)s] %(message)s', handlers=[logging.FileHandler(filename=rf'.\logs\log_{NOW_TIME_WITH_NO_SPACE}.txt', mode='w', encoding='utf-8')])
     else:
         logging.basicConfig(level=logging.DEBUG, format='[%(asctime)s][%(levelname)s] %(message)s')
     upLog(True)
