@@ -14,10 +14,9 @@ class MainWindow(QMainWindow):
         super().__init__()
         logging.info("初始化窗口中")
         self.config = readUIConfig()
-        lang = language[self.config["language"]] if "language" in self.config and self.config else language["zh-cn"]
-
+        self.lang = language[self.config["language"]] if "language" in self.config and self.config else language["zh-cn"]
         # 设置窗口标题和大小
-        self.setWindowTitle(f'{lang["title"]} v{versionInfo["version"]}')
+        self.setWindowTitle(f'{self.lang["title"]} v{versionInfo["version"]}')
         self.setWindowIcon(QIcon(resource_path(os.path.join("resources/", "icon.ico"))))
         self.resize(358, 223)
         self.setWindowFlags(Qt.WindowStaysOnTopHint)
@@ -34,19 +33,19 @@ class MainWindow(QMainWindow):
         for key in self.def_cfg.keys():
             if "offsets" in NB2_DATA[key]:
                 item = QListWidgetItem()
-                item.setText(lang[key])
+                item.setText(self.lang[key])
                 item.setStatusTip(f'{key}')
                 self.listWidget.addItem(item)
 
         self.listWidget.clicked.connect(self.listWidget_onClicked)
 
-        self.checkBoxEnable = QCheckBox(lang["enable"], self)
+        self.checkBoxEnable = QCheckBox(self.lang["enable"], self)
         self.checkBoxEnable.setGeometry(200, 10, 85, 20)
         self.checkBoxEnable.setCheckable(True)
         self.checkBoxEnable.setVisible(False)
         self.checkBoxEnable.clicked.connect(self.checkBoxEnable_onClicked)
 
-        self.checkBoxLock = QCheckBox(lang["lock"], self)
+        self.checkBoxLock = QCheckBox(self.lang["lock"], self)
         self.checkBoxLock.setGeometry(200, 40, 85, 20)
         self.checkBoxLock.setCheckable(True)
         self.checkBoxLock.setVisible(False)
@@ -54,7 +53,7 @@ class MainWindow(QMainWindow):
 
         self.label = QLabel(self)
         self.label.setGeometry(200, 170, 40, 20)
-        self.label.setText(lang["value"])
+        self.label.setText(self.lang["value"])
         self.label.setVisible(False)
 
         self.SpinBox = QSpinBox(self)
@@ -71,13 +70,13 @@ class MainWindow(QMainWindow):
         self.doubleSpinBox.setVisible(False)
         self.doubleSpinBox.editingFinished.connect(self.doubleSpinBox_onChange)
 
-        self.checkBoxLockMax = QCheckBox(lang["lockMax"], self)
+        self.checkBoxLockMax = QCheckBox(self.lang["lockMax"], self)
         self.checkBoxLockMax.setGeometry(200, 70, 85, 20)
         self.checkBoxLockMax.setCheckable(True)
         self.checkBoxLockMax.setVisible(False)
         self.checkBoxLockMax.clicked.connect(self.checkBoxLockMax_onClicked)
 
-        self.checkBoxOpen = QCheckBox(lang["open"], self)
+        self.checkBoxOpen = QCheckBox(self.lang["open"], self)
         self.checkBoxOpen.setGeometry(200, 170, 85, 20)
         self.checkBoxOpen.setCheckable(True)
         self.checkBoxOpen.setVisible(False)
@@ -88,7 +87,7 @@ class MainWindow(QMainWindow):
 
         logging.info("窗口初始化结束")
 
-        self.statusBar.showMessage(f'{lang["wait_game"]}', 5000)
+        self.statusBar.showMessage(f'{self.lang["wait_game"]}', 5000)
         self.listWidget.setCurrentRow(0)
         self.checkVisit(self.listWidget.currentItem().statusTip())
         self.c_key = self.listWidget.currentItem().statusTip()
@@ -167,7 +166,9 @@ class MainWindow(QMainWindow):
         current_key = f'{item.statusTip()}'
         logging.debug(f'{current_text}：{current_key}')
         if getMemAddress(current_key) is not None:
-            self.statusBar.showMessage(f'{current_text}: {readMemValue(getMemAddress(current_key), current_key)}', 5000)
+            self.statusBar.showMessage(f'{current_text}: {readMemValue(current_key)}', 5000)
+        else:
+            self.statusBar.showMessage(f'{self.lang["wait_game"]}', 5000)
         self.c_key = current_key
         logging.info(f"{current_text} {current_key}: {self.curr_cfg[current_key]}")
         self.checkVisit(current_key)

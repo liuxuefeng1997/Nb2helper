@@ -101,8 +101,9 @@ def checkRun(process_name):
     return False
 
 
-def writeMemValue(address, value, tag):
+def writeMemValue(tag, value):
     memInfo = NB2_DATA[tag]
+    address = getMemAddress(tag)
     logging.debug(memInfo)
     if "valueType" in memInfo:
         _type = memInfo["valueType"]
@@ -113,8 +114,9 @@ def writeMemValue(address, value, tag):
     return write_memory(pid, address, data)
 
 
-def readMemValue(address, tag):
+def readMemValue(tag):
     memInfo = NB2_DATA[tag]
+    address = getMemAddress(tag)
     if "valueType" in memInfo:
         _type = memInfo["valueType"]
     else:

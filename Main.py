@@ -69,29 +69,25 @@ def upLog(k):
 def checkAndSetData(tag):
     if CONFIG_DATA is not None:
         if tag in CONFIG_DATA and CONFIG_DATA[tag]["enable"]:
-            writeMemValue(getMemAddress(tag), CONFIG_DATA[tag]["value"], tag)
+            writeMemValue(tag, CONFIG_DATA[tag]["value"])
 
 
 def has_max(tag, lock_to_max=True):
-    if readMemValue(getMemAddress(tag), tag) < CONFIG_DATA[tag]["value"]:
-        if readMemValue(getMemAddress(f"MAX_{tag}"), f"MAX_{tag}") < CONFIG_DATA[tag]["value"]:  # 当最大值小于设定值时，修改最大值
-            writeMemValue(getMemAddress(f"MAX_{tag}"), CONFIG_DATA[tag]["value"],
-                          f"MAX_{tag}")
+    if readMemValue(tag) < CONFIG_DATA[tag]["value"]:
+        if readMemValue(f"MAX_{tag}") < CONFIG_DATA[tag]["value"]:  # 当最大值小于设定值时，修改最大值
+            writeMemValue(f"MAX_{tag}", CONFIG_DATA[tag]["value"])
     if lock_to_max:
-        if readMemValue(getMemAddress(f"MAX_{tag}"), f"MAX_{tag}") > readMemValue(
-                getMemAddress(tag), tag):  # 当值不满时，修改值至最大
-            writeMemValue(getMemAddress(tag),
-                          readMemValue(getMemAddress(f"MAX_{tag}"), f"MAX_{tag}"),
-                          tag)
+        if readMemValue(f"MAX_{tag}") > readMemValue(tag):  # 当值不满时，修改值至最大
+            writeMemValue(tag, readMemValue(f"MAX_{tag}"))
     else:
-        if readMemValue(getMemAddress(tag), tag) < CONFIG_DATA[tag]["value"]:  # 当值小于设定时修改值
-            writeMemValue(getMemAddress(tag), CONFIG_DATA[tag]["value"], tag)
+        if readMemValue(tag) < CONFIG_DATA[tag]["value"]:  # 当值小于设定时修改值
+            writeMemValue(tag, CONFIG_DATA[tag]["value"])
 
 
 def has_min(tag):
     # 当值小于设定时修改值
-    if readMemValue(getMemAddress(tag), tag) < CONFIG_DATA[tag]["value"]:
-        writeMemValue(getMemAddress(tag), CONFIG_DATA[tag]["value"], tag)
+    if readMemValue(tag) < CONFIG_DATA[tag]["value"]:
+        writeMemValue(tag, CONFIG_DATA[tag]["value"])
 
 
 def runOnce():
