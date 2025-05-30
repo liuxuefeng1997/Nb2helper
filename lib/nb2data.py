@@ -1,6 +1,6 @@
 EXE_NAME = "NeonAbyss2.exe"
 versionInfo = {
-    "version": "2025.05.27.2358.0038",
+    "version": "2025.05.30.1056.0039",
     "lines": [
         "1、为新版本游戏提供支持",
         "2、更新UI组件至PyQt6",
