@@ -14,7 +14,6 @@ def init():
         logging.basicConfig(level=logging.DEBUG, format='[%(asctime)s][%(levelname)s] %(message)s')
     upLog(True)
     checkConfig()
-    logging.info("等待游戏运行")
     delCache()
 
 
