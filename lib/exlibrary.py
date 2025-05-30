@@ -1,7 +1,9 @@
+import hashlib
 import json
 import os
 import struct
 import sys
+import time
 
 import psutil
 
@@ -10,6 +12,7 @@ from lib.default import *
 from lib.nb2data import *
 
 GLOBAL = None
+CONFIG_DATA: dict
 
 
 def fileHash(file_path: str, hash_method) -> str:
@@ -153,3 +156,129 @@ def resource_path(relative_path):
 
 def getBaseOffset(dll_name, dll_offset):
     return get_module_base(getPID(EXE_NAME), dll_name) + dll_offset
+
+
+def core_exec(s):
+    tips = ""
+    try:
+        while True:
+            if checkRun(EXE_NAME):
+                checkConfig()
+                stadd = getMemAddress()
+                caches = readCache()
+                if caches is not None:
+                    add = caches["start_address"]
+                    fmd5 = caches["config_md5"]
+                else:
+                    add = fmd5 = None
+
+                if fmd5 != fileHash("./config/config.json", hashlib.md5):
+                    global CONFIG_DATA
+                    CONFIG_DATA = readConfig()
+                    tips = f"配置修改已生效"
+                    writeCache(add, fileHash("./config/config.json", hashlib.md5))
+
+                if stadd is not None and stadd != 0x0:
+                    if add != stadd:
+                        writeCache(stadd, fileHash("./config/config.json", hashlib.md5))
+                        runOnce()
+                        logging.info(f"地址段: 0x{getMemAddress():X}")
+                        logging.info(f"修改器已启动")
+                        s.send({"lang_tag":"helper_started"})
+                        tips = ""
+
+                    if tips != "":
+                        runOnce()
+                        logging.debug(f"地址段: 0x{getMemAddress():X} {tips}")
+                        logging.info(tips)
+                        s.send({"lang_tag":"config_updated", "now_time": time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(time.time()))})
+                        tips = ""
+
+                if add is not None and checkRun(EXE_NAME):
+                    try:
+                        runLoop()
+                    except Exception as e:
+                        logging.debug(e)
+            else:
+                if os.path.exists("./cache"):
+                    os.remove("./cache")
+                    logging.info("等待游戏运行...")
+                    s.send({"lang_tag":"wait_game"})
+    except KeyboardInterrupt:
+        onClose()
+    except Exception as e:
+        logging.debug(e)
+
+
+def onClose():
+    logging.info("程序关闭")
+    return 0
+
+
+def writeCache(_stadd, _hash_c=""):
+    cx = open(f'./cache', 'wb')
+    cx.write(json.dumps(
+        {"start_address": _stadd, "config_md5": _hash_c}, ensure_ascii=False).encode("utf-8"))
+    cx.close()
+
+
+def readCache():
+    cx = None
+    if os.path.exists("./cache"):
+        with open(f'./cache', 'r') as file:
+            cx = json.loads(file.read())
+            file.close()
+    return cx
+
+
+def delCache():
+    if os.path.exists("./cache"):
+        os.remove("./cache")
+
+
+def upLog(k):
+    r = "\n"
+    for n in versionInfo["lines"]:
+        r += f"\n{n}"
+    logging.info(f'\n版本 {versionInfo["version"]}{r if k else ""}\n')
+
+
+def checkAndSetData(tag):
+    if tag in CONFIG_DATA and CONFIG_DATA[tag]["enable"]:
+        writeMemValue(tag, CONFIG_DATA[tag]["value"])
+
+
+def has_max(tag, lock_to_max=True):
+    if readMemValue(tag) < CONFIG_DATA[tag]["value"]:
+        if readMemValue(f"MAX_{tag}") < CONFIG_DATA[tag]["value"]:  # 当最大值小于设定值时，修改最大值
+            writeMemValue(f"MAX_{tag}", CONFIG_DATA[tag]["value"])
+    if lock_to_max:
+        if readMemValue(f"MAX_{tag}") > readMemValue(tag):  # 当值不满时，修改值至最大
+            writeMemValue(tag, readMemValue(f"MAX_{tag}"))
+    else:
+        if readMemValue(tag) < CONFIG_DATA[tag]["value"]:  # 当值小于设定时修改值
+            writeMemValue(tag, CONFIG_DATA[tag]["value"])
+
+
+def has_min(tag):
+    # 当值小于设定时修改值
+    if readMemValue(tag) < CONFIG_DATA[tag]["value"]:
+        writeMemValue(tag, CONFIG_DATA[tag]["value"])
+
+
+def runOnce():
+    for key in list(default_config.keys()):
+        if "lock" not in default_config[key]:
+            # 不允许锁定的项目
+            checkAndSetData(key)
+
+
+def runLoop():
+    for key in list(default_config.keys()):
+        if "lock" in default_config[key]:  # 允许锁定的项目
+            if f"MAX_{key}" in NB2_DATA:  # 有最大值的
+                if key in CONFIG_DATA and CONFIG_DATA[key]["enable"] and CONFIG_DATA[key]["lock"]:
+                    has_max(key, CONFIG_DATA[key]["lock_to_max"] if "lock_to_max" in CONFIG_DATA[key] else True)
+            else:  # 没有最大值的
+                if key in CONFIG_DATA and CONFIG_DATA[key]["enable"] and CONFIG_DATA[key]["lock"]:
+                    has_min(key)

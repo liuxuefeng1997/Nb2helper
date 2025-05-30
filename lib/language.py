@@ -1,6 +1,12 @@
 language = {
     "zh-cn": {
         "title": "Neon Abyss 2 修改器",
+        "hide": "隐藏",
+        "show": "显示",
+        "helper_started": "修改器已启动",
+        "config_updated": "配置修改已生效",
+        "about": "关于",
+        "quit": "退出",
         "wait_game": "等待启动游戏",
         "enable": "启用",
         "lock": "锁定",
@@ -17,6 +23,12 @@ language = {
     },
     "en-us": {
         "title": "Neon Abyss 2 Helper",
+        "hide": "Hide",
+        "show": "Show",
+        "helper_started": "Helper started",
+        "config_updated": "Config is updated",
+        "about": "About",
+        "quit": "Quit",
         "wait_game": "Wait game start ...",
         "enable": "Enable",
         "lock": "Lock",

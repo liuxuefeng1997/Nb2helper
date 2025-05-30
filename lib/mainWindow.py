@@ -1,99 +1,150 @@
-# -*- coding: utf-8 -*-
-from PyQt5.QtCore import *
-from PyQt5.QtGui import *
-from PyQt5.QtWidgets import *
-
+from PyQt6.QtCore import *
+from PyQt6.QtGui import *
+from PyQt6.QtWidgets import *
 
 from lib.exlibrary import *
 from lib.language import *
 from lib.nb2data import *
 
 
-class MainWindow(QMainWindow):
+class Thread(QThread):
+    data_sent = pyqtSignal(dict)
+
+    def __init__(self):
+        super().__init__()
+
+    def run(self):
+        core_exec(self)
+
+    def send(self, data):
+        self.data_sent.emit(data)
+
+
+class MainWindow(QWidget):
     def __init__(self):
         super().__init__()
         logging.info("初始化窗口中")
         self.config = readUIConfig()
         self.lang = language[self.config["language"]] if "language" in self.config and self.config else language["zh-cn"]
+        self.Icon = QIcon(resource_path(os.path.join("resources/", "icon.ico")))
         # 设置窗口标题和大小
-        self.setWindowTitle(f'{self.lang["title"]} v{versionInfo["version"]}')
-        self.setWindowIcon(QIcon(resource_path(os.path.join("resources/", "icon.ico"))))
-        self.resize(358, 223)
-        self.setWindowFlags(Qt.WindowStaysOnTopHint)
+        self.setWindowTitle(f'{self.lang["title"]}')
+        self.setWindowIcon(self.Icon)
+        self.resize(288, 223)
+        self.setWindowFlags(Qt.WindowType.WindowStaysOnTopHint)
         self.setFixedSize(self.width(), self.height())
-
+        # 初始化托盘图标
+        self.tray = QSystemTrayIcon(self)
+        self.tray.setIcon(self.Icon)
+        self.trayMenu = QMenu(self)
+        self.showAction = QAction(self)
+        self.showAction.setText(self.lang["hide"])
+        self.showAction.triggered.connect(self.showEx)
+        self.trayMenu.addAction(self.showAction)
+        self.aboutAction = QAction(self)
+        self.aboutAction.setText(self.lang["about"])
+        self.aboutAction.triggered.connect(self.buttonAbout_onClick)
+        self.trayMenu.addAction(self.aboutAction)
+        self.quitAction = QAction(self)
+        self.quitAction.setText(self.lang["quit"])
+        self.quitAction.triggered.connect(self.closeEvent)
+        self.trayMenu.addAction(self.quitAction)
+        self.tray.setContextMenu(self.trayMenu)
+        self.tray.show()
+        # 初始化配置
         self.curr_cfg = readConfig()
         self.def_cfg = default_config
-
+        # 初始化列表
         self.listWidget = QListWidget(self)
-        self.listWidget.setGeometry(0, 0, 171, 200)
+        self.listWidget.setGeometry(0, 0, 100, 200)
         self.listWidget.setStyleSheet("QListWidget::item { height: 20px; font-size: 11px; text-overflow: clip; }")
-        self.listWidget.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-
+        self.listWidget.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+        self.listWidget.clicked.connect(self.listWidget_onClicked)
+        # 初始化列表数据
         for key in self.def_cfg.keys():
             if "offsets" in NB2_DATA[key]:
                 item = QListWidgetItem()
                 item.setText(self.lang[key])
                 item.setStatusTip(f'{key}')
                 self.listWidget.addItem(item)
-
-        self.listWidget.clicked.connect(self.listWidget_onClicked)
-
+        # 初始化启用选择框
         self.checkBoxEnable = QCheckBox(self.lang["enable"], self)
-        self.checkBoxEnable.setGeometry(200, 10, 85, 20)
+        self.checkBoxEnable.setGeometry(130, 10, 85, 20)
         self.checkBoxEnable.setCheckable(True)
         self.checkBoxEnable.setVisible(False)
         self.checkBoxEnable.clicked.connect(self.checkBoxEnable_onClicked)
-
+        # 初始化锁定选择框
         self.checkBoxLock = QCheckBox(self.lang["lock"], self)
-        self.checkBoxLock.setGeometry(200, 40, 85, 20)
+        self.checkBoxLock.setGeometry(130, 40, 85, 20)
         self.checkBoxLock.setCheckable(True)
         self.checkBoxLock.setVisible(False)
         self.checkBoxLock.clicked.connect(self.checkBoxLock_onClicked)
-
+        # 初始化标签
         self.label = QLabel(self)
-        self.label.setGeometry(200, 170, 40, 20)
+        self.label.setGeometry(130, 170, 40, 20)
         self.label.setText(self.lang["value"])
         self.label.setVisible(False)
-
+        # 初始化整数数值输入框
         self.SpinBox = QSpinBox(self)
-        self.SpinBox.setGeometry(240, 169, 62, 22)
+        self.SpinBox.setGeometry(170, 169, 70, 22)
         self.SpinBox.setMaximum(999)
         self.SpinBox.setMinimum(0)
         self.SpinBox.setVisible(False)
         self.SpinBox.editingFinished.connect(self.SpinBox_onChange)
-
+        # 初始化浮点数值输入框
         self.doubleSpinBox = QDoubleSpinBox(self)
-        self.doubleSpinBox.setGeometry(240, 169, 62, 22)
+        self.doubleSpinBox.setGeometry(self.SpinBox.geometry())
         self.doubleSpinBox.setMaximum(1.00)
         self.doubleSpinBox.setMinimum(0.00)
         self.doubleSpinBox.setVisible(False)
         self.doubleSpinBox.editingFinished.connect(self.doubleSpinBox_onChange)
-
+        # 初始化锁定最大选择框
         self.checkBoxLockMax = QCheckBox(self.lang["lockMax"], self)
-        self.checkBoxLockMax.setGeometry(200, 70, 85, 20)
+        self.checkBoxLockMax.setGeometry(130, 70, 85, 20)
         self.checkBoxLockMax.setCheckable(True)
         self.checkBoxLockMax.setVisible(False)
         self.checkBoxLockMax.clicked.connect(self.checkBoxLockMax_onClicked)
-
+        # 初始化开启选择框
         self.checkBoxOpen = QCheckBox(self.lang["open"], self)
-        self.checkBoxOpen.setGeometry(200, 170, 85, 20)
+        self.checkBoxOpen.setGeometry(130, 170, 85, 20)
         self.checkBoxOpen.setCheckable(True)
         self.checkBoxOpen.setVisible(False)
         self.checkBoxOpen.clicked.connect(self.checkBoxOpen_onClicked)
-
+        # 初始化状态栏
         self.statusBar = QStatusBar(self)
-        self.statusBar.setGeometry(0, 201, 358, 22)
+        self.statusBar.setGeometry(0, 201, 288, 22)
+        self.statusBar.setSizeGripEnabled(False)
 
         logging.info("窗口初始化结束")
-
-        self.statusBar.showMessage(f'{self.lang["wait_game"]}', 5000)
+        # 加载数据
         self.listWidget.setCurrentRow(0)
         self.checkVisit(self.listWidget.currentItem().statusTip())
         self.c_key = self.listWidget.currentItem().statusTip()
+        # 启动核心线程
+        self.t = Thread()
+        self.t.data_sent.connect(self.callback)
+        self.t.start()
+
+    def callback(self, data):
+        lang_tag = data["lang_tag"]
+        ti = f' [{data["now_time"]}]' if "now_time" in data else ""
+        self.statusBar.showMessage(f'{self.lang[lang_tag]}{ti}', 5000)
+
+    def buttonAbout_onClick(self):
+        self.statusBar.showMessage(f'版本 v{versionInfo["version"]}', 5000)
+
+    def showEx(self):
+        if self.isHidden():
+            self.showAction.setText(self.lang["hide"])
+            self.show()
+        else:
+            self.showAction.setText(self.lang["show"])
+            self.hide()
 
     def closeEvent(self, e):
         logging.info("窗口关闭")
+        self.t.exit(0)
+        self.tray = None
         sys.exit(0)
 
     def checkVisit(self, current_key=None):
