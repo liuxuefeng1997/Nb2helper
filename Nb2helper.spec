@@ -2,7 +2,7 @@
 
 
 a = Analysis(
-    ['Main.py'],
+    ['main.py'],
     pathex=[],
     binaries=[],
     datas=[('.\\\\resources\\\\*.*', '.\\\\resources')],
