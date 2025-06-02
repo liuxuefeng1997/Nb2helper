@@ -2,9 +2,9 @@ EXE_NAME = "NeonAbyss2.exe"
 versionInfo = {
     "version": "2025.06.02.2250.0040",
     "lines": [
-        "1、新增四个修改项",
-        "2、修复了当配置文件缺少项目配置时崩溃的问题",
-        "3、新增语言切换（测试）",
+        "1、优化：移除每次启动时写出默认配置模板（已被取代）",
+        "2、新增语言切换（测试）",
+        "3、修复问题",
     ]
 }
 NB2_DATA = {
@@ -87,4 +87,10 @@ NB2_DATA = {
         "offsets": [0x0, 0x8, 0x8, 0x10, 0x28, 0x68, 0x20, 0x18, 0x58, 0x18, 0x360],
         "valueType": "d"
     },  # 射程
+    "EXPLOSION_DAMAGE": {
+        "dll_name": "UnityPlayer.dll",
+        "dll_offset": 0x01C87660,
+        "offsets": [0x0, 0x8, 0x8, 0x10, 0x28, 0x68, 0x20, 0x18, 0x58, 0x18, 0x768],
+        "valueType": "d"
+    },  # 爆炸伤害
 }

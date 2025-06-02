@@ -27,6 +27,7 @@ language = {
         "JUMP_SUM": "跳跃次数",
         "GUN_BALLISTICS": "弹道数量",
         "GUN_RANGE": "射程",
+        "EXPLOSION_DAMAGE": "爆炸伤害",
     },
     "en-us": {
         "title": "Neon Abyss 2 Helper",
@@ -56,5 +57,6 @@ language = {
         "JUMP_SUM": "Number of jumps",
         "GUN_BALLISTICS": "Ballistics",
         "GUN_RANGE": "Range",
+        "EXPLOSION_DAMAGE": "Explosion damage",
     }
 }

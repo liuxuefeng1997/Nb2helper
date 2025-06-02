@@ -51,6 +51,10 @@ default_config = {
         "enable": False,
         "value": 1
     },  # 射程
+    "EXPLOSION_DAMAGE": {
+        "enable": False,
+        "value": 1
+    },  # 爆炸伤害
 }
 default_ui = {
     "language": "zh-cn"
