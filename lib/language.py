@@ -23,6 +23,10 @@ language = {
         "KEYS": "钥匙",
         "MANA": "水晶",
         "GUN_SPEED": "射速",
+        "MOVE_SPEED": "移速",
+        "JUMP_SUM": "跳跃次数",
+        "GUN_BALLISTICS": "弹道数量",
+        "GUN_RANGE": "射程",
     },
     "en-us": {
         "title": "Neon Abyss 2 Helper",
@@ -48,5 +52,9 @@ language = {
         "KEYS": "Key",
         "MANA": "Crystal",
         "GUN_SPEED": "Fire Rate",
+        "MOVE_SPEED": "Movement speed",
+        "JUMP_SUM": "Number of jumps",
+        "GUN_BALLISTICS": "Ballistics",
+        "GUN_RANGE": "Range",
     }
 }

@@ -1,11 +1,10 @@
 EXE_NAME = "NeonAbyss2.exe"
 versionInfo = {
-    "version": "2025.05.30.1056.0039",
+    "version": "2025.06.02.2250.0040",
     "lines": [
-        "1、为新版本游戏提供支持",
-        "2、更新UI组件至PyQt6",
-        "3、优化了程序启动加载逻辑",
-        "* 注意配置文件差异：可将旧的配置文件备份后删除，让程序创建默认配置以支持新增条目",
+        "1、新增四个修改项",
+        "2、修复了当配置文件缺少项目配置时崩溃的问题",
+        "3、新增语言切换（测试）",
     ]
 }
 NB2_DATA = {
@@ -64,4 +63,28 @@ NB2_DATA = {
         "offsets": [0x8, 0x90, 0x60, 0x68, 0x20, 0x18, 0x10, 0x18, 0x390, 0x10],
         "valueType": "d"
     },  # 射速
+    "MOVE_SPEED": {
+        "dll_name": "UnityPlayer.dll",
+        "dll_offset": 0x01C87660,
+        "offsets": [0x0, 0x8, 0x8, 0x10, 0x28, 0x68, 0x20, 0x18, 0x58, 0x18, 0x14B8],
+        "valueType": "d"
+    },  # 移速
+    "JUMP_SUM": {
+        "dll_name": "UnityPlayer.dll",
+        "dll_offset": 0x01C87660,
+        "offsets": [0x0, 0x8, 0x8, 0x10, 0x28, 0x68, 0x20, 0x18, 0x58, 0x18, 0x1500],
+        "valueType": "d"
+    },  # 跳跃次数
+    "GUN_BALLISTICS": {
+        "dll_name": "UnityPlayer.dll",
+        "dll_offset": 0x01C87660,
+        "offsets": [0x0, 0x8, 0x8, 0x10, 0x28, 0x68, 0x20, 0x18, 0x58, 0x18, 0x318],
+        "valueType": "d"
+    },  # 弹道数量
+    "GUN_RANGE": {
+        "dll_name": "UnityPlayer.dll",
+        "dll_offset": 0x01C87660,
+        "offsets": [0x0, 0x8, 0x8, 0x10, 0x28, 0x68, 0x20, 0x18, 0x58, 0x18, 0x360],
+        "valueType": "d"
+    },  # 射程
 }

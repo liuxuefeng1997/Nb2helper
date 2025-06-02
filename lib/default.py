@@ -35,6 +35,22 @@ default_config = {
         "enable": False,
         "value": 1
     },
+    "MOVE_SPEED": {
+        "enable": False,
+        "value": 11
+    },
+    "JUMP_SUM": {
+        "enable": False,
+        "value": 0
+    },
+    "GUN_BALLISTICS": {
+        "enable": False,
+        "value": 1
+    },  # 弹道数量
+    "GUN_RANGE": {
+        "enable": False,
+        "value": 1
+    },  # 射程
 }
 default_ui = {
     "language": "zh-cn"

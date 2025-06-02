@@ -206,7 +206,9 @@ class MainWindow(QWidget):
         self.doubleSpinBox.setVisible(False)
         self.checkBoxOpen.setVisible(False)
         if current_key is not None:
-            enable = self.curr_cfg[current_key]["enable"]
+            enable = False
+            if current_key in self.curr_cfg:
+                enable = self.curr_cfg[current_key]["enable"]
             self.checkBoxEnable.setVisible(True)
             self.checkBoxEnable.setChecked(True) if enable else self.checkBoxEnable.setChecked(False)
         if self.checkBoxEnable.isChecked():
@@ -269,5 +271,10 @@ class MainWindow(QWidget):
         if getMemAddress(current_key) is not None:
             self.statusBar.showMessage(f'{current_text}: {readMemValue(current_key)}', 5000)
         self.c_key = current_key
+        if current_key not in self.curr_cfg:
+            logging.info(f"{current_text} {current_key}: 配置项不存在，写入默认配置")
+            l_dict = {f'{current_key}' :self.def_cfg[current_key]}
+            self.curr_cfg.update(l_dict)
+            writeConfig(self.curr_cfg)
         logging.info(f"{current_text} {current_key}: {self.curr_cfg[current_key]}")
         self.checkVisit(current_key)
