@@ -29,20 +29,19 @@ def fileHash(file_path: str, hash_method) -> str:
 def checkConfig():
     if not os.path.exists("./config"):
         os.mkdir("./config")
-    writeConfig(default_config, isTemple=True)
     if not os.path.exists("./config/config.json"):
         writeConfig(default_config)
     if not os.path.exists("./config/ui.cfg"):
         writeConfig(default_ui, _type="ui")
 
 
-def writeConfig(_jsonObj, _type="config", isTemple=False):
+def writeConfig(_jsonObj, _type="config"):
     match _type:
         case "ui":
             pfx = "cfg"
         case _:
             pfx = "json"
-    with open(f'./config/{_type}{".temple" if isTemple else ""}.{pfx}', 'w', encoding="UTF-8") as f:
+    with open(f'./config/{_type}.{pfx}', 'w', encoding="UTF-8") as f:
         f.write(json.dumps(_jsonObj, ensure_ascii=False))
         f.close()
 
