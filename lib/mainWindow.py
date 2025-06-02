@@ -25,7 +25,8 @@ class MainWindow(QWidget):
         super().__init__()
         logging.info("初始化窗口中")
         self.config = readUIConfig()
-        self.lang = language[self.config["language"]] if "language" in self.config and self.config else language["zh-cn"]
+        ll = self.config["language"] if self.config and "language" in self.config else "zh-cn"
+        self.lang = language[ll]
         self.Icon = QIcon(resource_path(os.path.join("resources/", "icon.ico")))
         # 设置窗口标题和大小
         self.setWindowTitle(f'{self.lang["title"]}')
@@ -36,20 +37,49 @@ class MainWindow(QWidget):
         # 初始化托盘图标
         self.tray = QSystemTrayIcon(self)
         self.tray.setIcon(self.Icon)
+        # 语言菜单
+        self.langMenu = QMenu(self)
+        self.langMenu.setTitle(self.lang["language"])
+        self.langCNAction = QAction(self)
+        self.langCNAction.setText("简体中文")
+        self.langCNAction.triggered.connect(self.activeLangCN)
+        self.langENAction = QAction(self)
+        self.langENAction.setText("English")
+        self.langENAction.triggered.connect(self.activeLangEN)
+        self.langMenu.addAction(self.langCNAction)
+        self.langMenu.addAction(self.langENAction)
+        match ll:
+            case "zh-cn":
+                self.langCNAction.setChecked(True)
+                self.langENAction.setChecked(False)
+            case "en-us":
+                self.langCNAction.setChecked(False)
+                self.langENAction.setChecked(True)
+        # 托盘右键菜单
         self.trayMenu = QMenu(self)
+
         self.showAction = QAction(self)
         self.showAction.setText(self.lang["hide"])
         self.showAction.triggered.connect(self.showEx)
         self.trayMenu.addAction(self.showAction)
+
+        self.trayMenu.addSeparator()
+        self.trayMenu.addMenu(self.langMenu)
+
         self.aboutAction = QAction(self)
         self.aboutAction.setText(self.lang["about"])
         self.aboutAction.triggered.connect(self.buttonAbout_onClick)
         self.trayMenu.addAction(self.aboutAction)
+
+        self.trayMenu.addSeparator()
+
         self.quitAction = QAction(self)
         self.quitAction.setText(self.lang["quit"])
         self.quitAction.triggered.connect(self.closeEvent)
         self.trayMenu.addAction(self.quitAction)
+
         self.tray.setContextMenu(self.trayMenu)
+        self.tray.activated.connect(self.tray_isClicked)
         self.tray.show()
         # 初始化配置
         self.curr_cfg = readConfig()
@@ -130,8 +160,28 @@ class MainWindow(QWidget):
         ti = f' [{data["now_time"]}]' if "now_time" in data else ""
         self.statusBar.showMessage(f'{self.lang[lang_tag]}{ti}', 5000)
 
+    def tray_isClicked(self, reason):
+        logging.debug(f'tray-icon: {reason} {type(reason)}')
+        match f'{reason}':
+            case "ActivationReason.DoubleClick":
+                self.showEx()
+
+    def activeLangCN(self):
+        self.config["language"] = "zh-cn"
+        writeConfig(self.config, "ui")
+        self.langCNAction.setChecked(True)
+        self.langENAction.setChecked(False)
+        self.statusBar.showMessage(f'{self.lang["next_start_active_lang"]}', 5000)
+
+    def activeLangEN(self):
+        self.config["language"] = "en-us"
+        writeConfig(self.config, "ui")
+        self.langCNAction.setChecked(False)
+        self.langENAction.setChecked(True)
+        self.statusBar.showMessage(f'{self.lang["next_start_active_lang"]}', 5000)
+
     def buttonAbout_onClick(self):
-        self.statusBar.showMessage(f'版本 v{versionInfo["version"]}', 5000)
+        self.statusBar.showMessage(f'{self.lang["version"]}v{versionInfo["version"]}', 5000)
 
     def showEx(self):
         if self.isHidden():
@@ -218,8 +268,6 @@ class MainWindow(QWidget):
         logging.debug(f'{current_text}：{current_key}')
         if getMemAddress(current_key) is not None:
             self.statusBar.showMessage(f'{current_text}: {readMemValue(current_key)}', 5000)
-        else:
-            self.statusBar.showMessage(f'{self.lang["wait_game"]}', 5000)
         self.c_key = current_key
         logging.info(f"{current_text} {current_key}: {self.curr_cfg[current_key]}")
         self.checkVisit(current_key)
