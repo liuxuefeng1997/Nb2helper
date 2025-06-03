@@ -1,9 +1,14 @@
-# 基本说明
+# <center> Neon Abyss 2 修改器
+
+![GitHub Downloads](https://img.shields.io/github/downloads/liuxuefeng1997/Nb2helper/latest/total?label=%E4%B8%8B%E8%BD%BD&style=for-the-badge) &nbsp;
+![GitHub Repo stars](https://img.shields.io/github/stars/liuxuefeng1997/Nb2helper?style=for-the-badge&color=green)
+
+## 基本说明
 * 使用python3.13和PyQt6构建
 * 配置文件实时生效
-# 修改项
-| 属性名          | 说明           | 支持状态  |
-|----------------|---------------|----------|
+## 修改项
+| 属性名             | 名称        | 支持状态  |
+|-------------------|------------|----------|
 | GOLD              | 金币        | ✅       |
 | HEALTH            | 血量        | ✅       |
 | MAX_HEALTH        | 血量上限     | ✅       |
@@ -18,7 +23,7 @@
 | GUN_BALLISTICS    | 弹道数量     | ✅       |
 | GUN_RANGE         | 射程        | ✅       |
 | EXPLOSION_DAMAGE  | 爆炸伤害     |         |
-# 计划实现的功能
+## 计划实现的功能
 * 代码和程序优化
 <br>
 <br>
