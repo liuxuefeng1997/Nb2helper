@@ -213,14 +213,14 @@ class MainWindow(QWidget):
             self.checkBoxEnable.setChecked(True) if enable else self.checkBoxEnable.setChecked(False)
         if self.checkBoxEnable.isChecked():
             if "lock" in self.def_cfg[current_key]:
-                if "lock" not in self.curr_cfg[self.c_key]:
-                    self.curr_cfg[self.c_key].update({"lock":False})
+                if "lock" not in self.curr_cfg[current_key]:
+                    self.curr_cfg[current_key].update({"lock":False})
                     writeConfig(self.curr_cfg)
                 self.checkBoxLock.setChecked(self.curr_cfg[current_key]["lock"])
                 self.checkBoxLock.setVisible(True)
             if "lock_to_max" in self.def_cfg[current_key] and self.checkBoxLock.isChecked():
-                if "lock_to_max" not in self.curr_cfg[self.c_key]:
-                    self.curr_cfg[self.c_key].update({"lock_to_max":False})
+                if "lock_to_max" not in self.curr_cfg[current_key]:
+                    self.curr_cfg[current_key].update({"lock_to_max":False})
                     writeConfig(self.curr_cfg)
                 self.checkBoxLockMax.setChecked(self.curr_cfg[current_key]["lock_to_max"])
                 self.checkBoxLockMax.setVisible(True)
