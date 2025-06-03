@@ -1,6 +1,6 @@
 # <center> Neon Abyss 2 修改器
 
-![GitHub Downloads](https://img.shields.io/github/downloads/liuxuefeng1997/Nb2helper/latest/total?label=%E4%B8%8B%E8%BD%BD&style=for-the-badge)
+![GitHub Downloads](https://img.shields.io/github/downloads/liuxuefeng1997/Nb2helper/latest/total?label=%E4%B8%8B%E8%BD%BD&style=for-the-badge&color=green)
 
 ## 基本说明
 * 使用python3.13和PyQt6构建
