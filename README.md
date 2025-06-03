@@ -19,10 +19,10 @@
 | GUN_SPEED         | 射速        | ✅       |
 | MAX_MANA          | 水晶上限     | ✅       |
 | MOVE_SPEED        | 移速        | ✅       |
-| JUMP_SUM          | 跳跃次数     | ✅       |
+| TEMP_JUMP_SUM     | 临时跳跃次数  | ✅       |
 | GUN_BALLISTICS    | 弹道数量     | ✅       |
 | GUN_RANGE         | 射程        | ✅       |
-| EXPLOSION_DAMAGE  | 爆炸伤害     |         |
+| EXPLOSION_DAMAGE  | 爆炸伤害     | ✅        |
 ## 计划实现的功能
 * 代码和程序优化
 * 更多修改项（大概吧

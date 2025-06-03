@@ -1,10 +1,10 @@
 EXE_NAME = "NeonAbyss2.exe"
 versionInfo = {
-    "version": "2025.06.02.2250.0040",
+    "version": "2025.06.03.2245.0041",
     "lines": [
         "1、优化：移除每次启动时写出默认配置模板（已被取代）",
-        "2、新增语言切换（测试）",
-        "3、修复问题",
+        "2、修复潜在崩溃问题",
+        "3、新增语言切换（测试）",
     ]
 }
 NB2_DATA = {
@@ -69,7 +69,7 @@ NB2_DATA = {
         "offsets": [0x0, 0x8, 0x8, 0x10, 0x28, 0x68, 0x20, 0x18, 0x58, 0x18, 0x14B8],
         "valueType": "d"
     },  # 移速
-    "JUMP_SUM": {
+    "TEMP_JUMP_SUM": {
         "dll_name": "UnityPlayer.dll",
         "dll_offset": 0x01C87660,
         "offsets": [0x0, 0x8, 0x8, 0x10, 0x28, 0x68, 0x20, 0x18, 0x58, 0x18, 0x1500],

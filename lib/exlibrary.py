@@ -275,9 +275,11 @@ def runOnce():
 def runLoop():
     for key in list(default_config.keys()):
         if "lock" in default_config[key]:  # 允许锁定的项目
+            isLock = CONFIG_DATA[key]["lock"] if "lock" in CONFIG_DATA[key] else False
             if f"MAX_{key}" in NB2_DATA:  # 有最大值的
-                if key in CONFIG_DATA and CONFIG_DATA[key]["enable"] and CONFIG_DATA[key]["lock"]:
-                    has_max(key, CONFIG_DATA[key]["lock_to_max"] if "lock_to_max" in CONFIG_DATA[key] else True)
+                if key in CONFIG_DATA and CONFIG_DATA[key]["enable"] and isLock:
+                    isLockMax = CONFIG_DATA[key]["lock_to_max"] if "lock_to_max" in CONFIG_DATA[key] else False
+                    has_max(key, isLockMax)
             else:  # 没有最大值的
-                if key in CONFIG_DATA and CONFIG_DATA[key]["enable"] and CONFIG_DATA[key]["lock"]:
+                if key in CONFIG_DATA and CONFIG_DATA[key]["enable"] and isLock:
                     has_min(key)

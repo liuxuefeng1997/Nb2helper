@@ -39,7 +39,8 @@ default_config = {
         "enable": False,
         "value": 11
     },
-    "JUMP_SUM": {
+    "TEMP_JUMP_SUM": {
+        "lock": False,
         "enable": False,
         "value": 0
     },
