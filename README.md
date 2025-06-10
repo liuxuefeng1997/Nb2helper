@@ -1,11 +1,13 @@
-# <center> Neon Abyss 2 修改器
+# Neon Abyss 2 修改器
 
 [![GitHub release downloads](https://img.shields.io/github/release/liuxuefeng1997/Nb2helper.svg?logo=github&style=flat-square)](https://github.com/liuxuefeng1997/Nb2helper/releases/latest)
+[![Python Version](https://img.shields.io/badge/Python-3.13-green?logo=python)](https://www.python.org/downloads/release/python-3134/)
+[![PyQt6](https://img.shields.io/badge/PyQt6-6.9.1-orange?logo=qt)](https://pypi.org/project/PyQt6/)
 
+## 计划实现的功能
+* 代码和程序优化
+* 更多修改项（大概吧
 
-## 基本说明
-* 使用python3.13和PyQt6构建
-* 配置文件实时生效
 ## 修改项
 | 属性名             | 名称        | 支持状态  |
 |-------------------|------------|----------|
@@ -23,9 +25,7 @@
 | GUN_BALLISTICS    | 弹道数量     | ✅       |
 | GUN_RANGE         | 射程        | ✅       |
 | EXPLOSION_DAMAGE  | 爆炸伤害     | ✅        |
-## 计划实现的功能
-* 代码和程序优化
-* 更多修改项（大概吧
+
 <br>
 <br>
 <br>
