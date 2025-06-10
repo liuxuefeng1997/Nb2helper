@@ -1,6 +1,6 @@
 # <center> Neon Abyss 2 修改器
 
-[![GitHub release downloads](https://img.shields.io/github/downloads/liuxuefeng1997/Nb2helper/total?logo=github)](https://github.com/liuxuefeng1997/Nb2helper/releases/latest)
+[![GitHub release downloads](https://img.shields.io/github/release/liuxuefeng1997/Nb2helper.svg?logo=github&style=flat-square)](https://github.com/liuxuefeng1997/Nb2helper/releases/latest)
 
 
 ## 基本说明
