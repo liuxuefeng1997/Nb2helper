@@ -3,7 +3,7 @@ from PyQt6.QtGui import *
 from PyQt6.QtWidgets import *
 
 from lib.exlibrary import *
-from lib.language import *
+from data.language import *
 from data.nb2data import *
 
 
