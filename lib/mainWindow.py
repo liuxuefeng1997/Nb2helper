@@ -4,7 +4,7 @@ from PyQt6.QtWidgets import *
 
 from lib.exlibrary import *
 from lib.language import *
-from lib.nb2data import *
+from data.nb2data import *
 
 
 class Thread(QThread):

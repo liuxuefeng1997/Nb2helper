@@ -8,8 +8,8 @@ import time
 import psutil
 
 from lib.core import *
-from lib.default import *
-from lib.nb2data import *
+from data.default import *
+from data.nb2data import *
 
 GLOBAL = None
 CONFIG_DATA: dict
