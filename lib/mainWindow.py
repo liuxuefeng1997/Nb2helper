@@ -25,8 +25,8 @@ class MainWindow(QWidget):
         super().__init__()
         logging.info("初始化窗口中")
         self.config = readUIConfig()
-        ll = self.config["language"] if self.config and "language" in self.config else "zh-cn"
-        self.lang = language[ll]
+        currSetLang = self.config["language"] if self.config and "language" in self.config else "zh-cn"
+        self.lang = language[currSetLang]
         self.Icon = QIcon(resource_path(os.path.join("resources/", "icon.ico")))
         # 设置窗口标题和大小
         self.setWindowTitle(f'{self.lang["title"]}')
@@ -48,7 +48,7 @@ class MainWindow(QWidget):
         self.langENAction.triggered.connect(self.activeLangEN)
         self.langMenu.addAction(self.langCNAction)
         self.langMenu.addAction(self.langENAction)
-        match ll:
+        match currSetLang:
             case "zh-cn":
                 self.langCNAction.setChecked(True)
                 self.langENAction.setChecked(False)
