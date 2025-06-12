@@ -46,19 +46,15 @@ def writeConfig(_jsonObj, _type="config"):
         f.close()
 
 
-def readConfig():
+def readConfig(_type="config"):
+    match _type:
+        case "ui":
+            pfx = "cfg"
+        case _:
+            pfx = "json"
     cx = None
-    if os.path.exists("./config/config.json"):
-        with open(f'./config/config.json', 'r', encoding="UTF-8") as f:
-            cx = json.loads(f.read())
-            f.close()
-    return cx
-
-
-def readUIConfig():
-    cx = None
-    if os.path.exists("./config/ui.cfg"):
-        with open(f'./config/ui.cfg', 'r', encoding="UTF-8") as f:
+    if os.path.exists(f"./config/{_type}.{pfx}"):
+        with open(f'./config/{_type}.{pfx}', 'r', encoding="UTF-8") as f:
             cx = json.loads(f.read())
             f.close()
     return cx

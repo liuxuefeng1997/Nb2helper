@@ -24,7 +24,7 @@ class MainWindow(QWidget):
     def __init__(self):
         super().__init__()
         logging.info("初始化窗口中")
-        self.config = readUIConfig()
+        self.config = readConfig("ui")
         currSetLang = self.config["language"] if self.config and "language" in self.config else "zh-cn"
         self.lang = language[currSetLang]
         self.Icon = QIcon(resource_path(os.path.join("resources/", "icon.ico")))
@@ -195,6 +195,7 @@ class MainWindow(QWidget):
         logging.info("窗口关闭")
         self.t.exit(0)
         self.tray = None
+        self.saveGeometry()
         sys.exit(0)
 
     def checkVisit(self, current_key=None):
