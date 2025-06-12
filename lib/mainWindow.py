@@ -28,6 +28,7 @@ class MainWindow(QWidget):
         currSetLang = self.config["language"] if self.config and "language" in self.config else "zh-cn"
         self.lang = language[currSetLang]
         self.Icon = QIcon(resource_path(os.path.join("resources/", "icon.ico")))
+        self.checkIcon = QIcon(resource_path(os.path.join("resources/", "check.png")))
         # 设置窗口标题和大小
         self.setWindowTitle(f'{self.lang["title"]}')
         self.setWindowIcon(self.Icon)
@@ -51,10 +52,12 @@ class MainWindow(QWidget):
         match currSetLang:
             case "zh-cn":
                 self.langCNAction.setChecked(True)
+                self.langCNAction.setIcon(self.checkIcon)
                 self.langENAction.setChecked(False)
             case "en-us":
                 self.langCNAction.setChecked(False)
                 self.langENAction.setChecked(True)
+                self.langENAction.setIcon(self.checkIcon)
         # 托盘右键菜单
         self.trayMenu = QMenu(self)
 
