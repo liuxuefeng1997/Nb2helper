@@ -283,8 +283,7 @@ class MainWindow(QWidget):
         self.c_key = current_key
         if current_key not in self.curr_cfg:
             logging.info(f"{current_text} {current_key}: 配置项不存在，写入默认配置")
-            l_dict = {f'{current_key}' :self.def_cfg[current_key]}
-            self.curr_cfg.update(l_dict)
+            self.curr_cfg[current_key] = self.def_cfg[current_key]
             writeConfig(self.curr_cfg)
         logging.info(f"{current_text} {current_key}: {self.curr_cfg[current_key]}")
         self.checkVisit(current_key)
