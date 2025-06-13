@@ -198,7 +198,6 @@ class MainWindow(QWidget):
         logging.info("窗口关闭")
         self.t.exit(0)
         self.tray = None
-        self.saveGeometry()
         sys.exit(0)
 
     def checkVisit(self, current_key=None):
