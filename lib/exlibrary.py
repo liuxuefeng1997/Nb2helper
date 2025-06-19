@@ -10,6 +10,7 @@ import psutil
 from lib.core import *
 from data.default import *
 from data.nb2data import *
+from lib.ext_xml import *
 
 GLOBAL = None
 CONFIG_DATA: dict
@@ -279,3 +280,33 @@ def runLoop():
             else:  # 没有最大值的
                 if key in CONFIG_DATA and CONFIG_DATA[key]["enable"] and isLock:
                     has_min(key)
+
+
+def getCEData(file_path):
+    res: dict | None = None
+    xml_obj = xml_load(file_path)
+    ce_tables = xml_obj.get('CheatTable').get('CheatEntries').get('CheatEntry')
+    if ce_tables:
+        res = {"_DEFAULT_": DEFAULT_DICT}
+        for line in ce_tables:
+            Address = line.get('Address')
+            Key = line.get('Description').replace('"', '')
+            match line.get('VariableType'):
+                case "Double":
+                    vType = 'd'
+                case "Float":
+                    vType = 'f'
+                case _:
+                    vType = "?"
+            if Address:
+                Address = Address.split("+")
+                dll_name = Address[0].replace('"', '')
+                dll_offset = Address[1]
+                offsets = line.get('Offsets').get('Offset')
+                o = []
+                for offset in reversed(offsets):
+                    o.append(int(offset, 16))
+                node = {Key: dict(dll_name=dll_name, dll_offset=int(dll_offset, 16), offsets=o, valueType=vType)}
+                res.update(node)
+
+    return res

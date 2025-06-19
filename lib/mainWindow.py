@@ -66,6 +66,11 @@ class MainWindow(QWidget):
         self.showAction.triggered.connect(self.showEx)
         self.trayMenu.addAction(self.showAction)
 
+        self.importCt = QAction(self)
+        self.importCt.setText(self.lang["importCt"])
+        self.importCt.triggered.connect(self.selectFile)
+        self.trayMenu.addAction(self.importCt)
+
         self.trayMenu.addSeparator()
         self.trayMenu.addMenu(self.langMenu)
 
@@ -94,12 +99,7 @@ class MainWindow(QWidget):
         self.listWidget.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
         self.listWidget.clicked.connect(self.listWidget_onClicked)
         # 初始化列表数据
-        for key in self.def_cfg.keys():
-            if "offsets" in NB2_DATA[key]:
-                item = QListWidgetItem()
-                item.setText(self.lang[key])
-                item.setStatusTip(f'{key}')
-                self.listWidget.addItem(item)
+        self.loadList()
         # 初始化启用选择框
         self.checkBoxEnable = QCheckBox(self.lang["enable"], self)
         self.checkBoxEnable.setGeometry(130, 10, 85, 20)
@@ -157,6 +157,36 @@ class MainWindow(QWidget):
         self.t = Thread()
         self.t.data_sent.connect(self.callback)
         self.t.start()
+
+    def loadList(self, clear=False):
+        if os.path.exists(resource_path(os.path.join("config/", "nb2data.json"))):
+            DATA = readConfig("nb2data")
+            for key in NB2_DATA.keys():
+                if DATA.get(key):
+                    NB2_DATA[key] = DATA[key]
+        if clear:
+            self.listWidget.clear()
+        for key in self.def_cfg.keys():
+            if "offsets" in NB2_DATA[key]:
+                item = QListWidgetItem()
+                item.setText(self.lang[key])
+                item.setStatusTip(f'{key}')
+                self.listWidget.addItem(item)
+        self.listWidget.setCurrentRow(0)
+
+    def selectFile(self):
+        fileName = QFileDialog.getOpenFileName(self, self.lang["importCt"], "./", f'{self.lang["ce_tables"]}(*.CT)')[0]
+        if fileName:
+            N_DATA = getCEData(fileName)
+            if N_DATA:
+                out = {"_DEFAULT_": DEFAULT_DICT}
+                for key in NB2_DATA.keys():
+                    if N_DATA.get(key) and NB2_DATA[key] != N_DATA[key]:
+                        out.update({key: N_DATA[key]})
+                if out:
+                    writeConfig(out, "nb2data")
+                    self.loadList(True)
+
 
     def callback(self, data):
         lang_tag = data["lang_tag"]
@@ -284,5 +314,5 @@ class MainWindow(QWidget):
             logging.info(f"{current_text} {current_key}: 配置项不存在，写入默认配置")
             self.curr_cfg[current_key] = self.def_cfg[current_key]
             writeConfig(self.curr_cfg)
-        logging.info(f"{current_text} {current_key}: {self.curr_cfg[current_key]}")
+        logging.info(f"{current_text} {current_key}: {self.curr_cfg[current_key]} | {NB2_DATA[current_key]}")
         self.checkVisit(current_key)

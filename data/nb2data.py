@@ -1,14 +1,14 @@
 EXE_NAME = "NeonAbyss2.exe"
 versionInfo = {
-    "version": "2025.06.13.0358.0042",
+    "version": "2025.06.19.1647.0043",
     "lines": [
-        "1、代码结构优化",
-        "2、修复潜在崩溃问题",
-        "3、托盘菜单显示优化",
+        "1、新增从CT表加载新数据",
+        "2、托盘菜单显示优化",
     ]
 }
+DEFAULT_DICT = {'dll_name': "UnityPlayer.dll", 'dll_offset': 0x01C87660, 'offsets': [0x8, 0x90, 0x60, 0x68, 0x20, 0x18, 0x10, 0x18, 0x0]}
 NB2_DATA = {
-    "_DEFAULT_": dict(dll_name="UnityPlayer.dll", dll_offset=0x01C87660, offsets=[0x8, 0x90, 0x60, 0x68, 0x20, 0x18, 0x10, 0x18, 0x0]),
+    "_DEFAULT_": DEFAULT_DICT,
     "GOLD": {
         "dll_name": "UnityPlayer.dll",
         "dll_offset": 0x01C87660,
