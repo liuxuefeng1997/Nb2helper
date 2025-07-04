@@ -1,6 +1,6 @@
 EXE_NAME = "NeonAbyss2.exe"
 versionInfo = {
-    "version": "2025.07.02.0257.0044",
+    "version": "2025.07.04.2057.0045",
     "lines": [
         "1、更新支持最新版本",
         "2、支持从CT表更新数据",
