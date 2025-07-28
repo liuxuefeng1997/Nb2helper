@@ -31,6 +31,7 @@ language = {
         "GUN_BALLISTICS": "弹道数量",
         "GUN_RANGE": "射程",
         "EXPLOSION_DAMAGE": "爆炸伤害",
+        "FLY": "飞行",
     },
     "en-us": {
         "title": "Neon Abyss 2 Helper",
@@ -64,5 +65,6 @@ language = {
         "GUN_BALLISTICS": "Ballistics",
         "GUN_RANGE": "Range",
         "EXPLOSION_DAMAGE": "Explosion damage",
+        "FLY": "Fly",
     }
 }

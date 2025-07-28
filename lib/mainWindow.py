@@ -259,7 +259,7 @@ class MainWindow(QWidget):
                 self.checkBoxLockMax.setVisible(True)
             if "valueType" in NB2_DATA[current_key]:
                 match NB2_DATA[current_key]["valueType"]:
-                    case "d":
+                    case "d" | "4b":
                         self.label.setVisible(True)
                         self.SpinBox.setVisible(True)
                         self.SpinBox.setValue(self.curr_cfg[current_key]["value"])

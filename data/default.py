@@ -56,6 +56,10 @@ default_config = {
         "enable": False,
         "value": 1
     },  # 爆炸伤害
+    "FLY": {
+        "enable": False,
+        "value": 0
+    },  # 飞行
 }
 default_ui = {
     "language": "zh-cn"

@@ -1,9 +1,9 @@
 EXE_NAME = "NeonAbyss2.exe"
 versionInfo = {
-    "version": "2025.07.04.2057.0045",
+    "version": "2025.07.29.0212.0046",
     "lines": [
         "1、更新支持最新版本",
-        "2、支持从CT表更新数据",
+        "2、新增飞行修改开关",
     ]
 }
 DEFAULT_DICT = {'dll_name': "UnityPlayer.dll", 'dll_offset': 0x01C87660, 'offsets': [0x8, 0x10, 0x28, 0x68, 0x20, 0x18, 0x10, 0x18, 0x0]}
@@ -93,4 +93,10 @@ NB2_DATA = {
         "offsets": [0x0, 0x8, 0x8, 0x10, 0x28, 0x68, 0x20, 0x18, 0x58, 0x18, 0x768],
         "valueType": "d"
     },  # 爆炸伤害
+    "FLY": {
+        "dll_name": "UnityPlayer.dll",
+        "dll_offset": 0x01BF5B40,
+        "offsets": [0x0, 0x98, 0x570, 0x330, 0x60, 0x108, 0x590, 0x3C3],
+        "valueType": "b"
+    },  # 飞行
 }
