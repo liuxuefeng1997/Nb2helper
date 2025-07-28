@@ -25,6 +25,7 @@
 | GUN_BALLISTICS    | 弹道数量     | ✅       |
 | GUN_RANGE         | 射程        | ✅       |
 | EXPLOSION_DAMAGE  | 爆炸伤害     | ✅        |
+| FLY               | 飞行        |           |
 
 <br>
 <br>
