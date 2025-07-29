@@ -57,29 +57,35 @@ default_config = {
         "value": 1
     },  # 爆炸伤害
     "FLY": {
+        "lock": False,
         "enable": False,
         "value": 0
     },  # 飞行
     "NO_KEY": {
+        "lock": False,
         "enable": False,
         "value": 0
     },  # 无需钥匙
     "DOUBLE_COIN": {
+        "lock": False,
         "enable": False,
         "value": 0
     },  # 双倍金币
     "ITEM_CAN_DESTROY": {
+        "lock": False,
         "enable": False,
         "value": 0
     },  # 物品可破坏
     "PLAYER_IS_DIE": {
+        "lock": False,
         "enable": False,
         "value": 0
     },  # 玩家已死亡
     "BOX_PFX": {
+        "lock": False,
         "enable": False,
         "value": 1.0
-    },  # 宝箱判断范围
+    },  # 宝箱判定范围
 }
 default_ui = {
     "language": "zh-cn"
