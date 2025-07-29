@@ -11,21 +11,25 @@
 ## 修改项
 | 属性名             | 名称        | 支持状态  |
 |-------------------|------------|----------|
-| GOLD              | 金币        | ✅       |
 | HEALTH            | 血量        | ✅       |
 | MAX_HEALTH        | 血量上限     | ✅       |
+| MANA              | 水晶        | ✅       |
+| MAX_MANA          | 水晶上限     | ✅       |
 | SHIELDS           | 护盾        | ✅       |
 | BOMBER            | 手雷        | ✅       |
 | KEYS              | 钥匙        | ✅       |
-| MANA              | 水晶        | ✅       |
+| GOLD              | 金币        | ✅       |
 | GUN_SPEED         | 射速        | ✅       |
-| MAX_MANA          | 水晶上限     | ✅       |
 | MOVE_SPEED        | 移速        | ✅       |
 | TEMP_JUMP_SUM     | 临时跳跃次数  | ✅       |
 | GUN_BALLISTICS    | 弹道数量     | ✅       |
 | GUN_RANGE         | 射程        | ✅       |
 | EXPLOSION_DAMAGE  | 爆炸伤害     | ✅        |
-| FLY               | 飞行        |           |
+| FLY               | 飞行        | ✅        |
+| NO_KEY            | 无需钥匙     | ✅       |
+| DOUBLE_COIN       | 双倍金币     | ✅       |
+| ITEM_CAN_DESTROY  | 物品可破坏   | ✅       |
+| PLAYER_IS_DIE     | 玩家已死亡   | ✅       |
 
 <br>
 <br>

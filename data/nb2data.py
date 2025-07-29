@@ -95,8 +95,32 @@ NB2_DATA = {
     },  # 爆炸伤害
     "FLY": {
         "dll_name": "UnityPlayer.dll",
-        "dll_offset": 0x01BF5B40,
-        # "offsets": [0x0, 0x98, 0x570, 0x330, 0x60, 0x108, 0x590, 0x3C3],
+        "dll_offset": 0x01C87660,
+        "offsets": [0x8, 0x10, 0x28, 0x68, 0x238, 0x590, 0x3C3],
         "valueType": "b"
     },  # 飞行
+    "NO_KEY": {
+        "dll_name": "UnityPlayer.dll",
+        "dll_offset": 0x01C87660,
+        "offsets": [0x8, 0x10, 0x28, 0x68, 0x238, 0x590, 0x2F0],
+        "valueType": "b"
+    },  # 无需钥匙
+    "DOUBLE_COIN": {
+        "dll_name": "UnityPlayer.dll",
+        "dll_offset": 0x01C87660,
+        "offsets": [0x8, 0x10, 0x28, 0x68, 0x238, 0x590, 0x76],
+        "valueType": "b"
+    },  # 双倍金币
+    "ITEM_CAN_DESTROY": {
+        "dll_name": "UnityPlayer.dll",
+        "dll_offset": 0x01C87660,
+        "offsets": [0x8, 0x10, 0x28, 0x68, 0x238, 0x590, 0x0F0],
+        "valueType": "b"
+    },  # 物品可破坏
+    "PLAYER_IS_DIE": {
+        "dll_name": "UnityPlayer.dll",
+        "dll_offset": 0x01C87660,
+        "offsets": [0x8, 0x10, 0x28, 0x68, 0x238, 0x1E4],
+        "valueType": "b"
+    },  # 玩家已死亡
 }

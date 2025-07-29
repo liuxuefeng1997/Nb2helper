@@ -60,6 +60,22 @@ default_config = {
         "enable": False,
         "value": 0
     },  # 飞行
+    "NO_KEY": {
+        "enable": False,
+        "value": 0
+    },  # 无需钥匙
+    "DOUBLE_COIN": {
+        "enable": False,
+        "value": 0
+    },  # 双倍金币
+    "ITEM_CAN_DESTROY": {
+        "enable": False,
+        "value": 0
+    },  # 物品可破坏
+    "PLAYER_IS_DIE": {
+        "enable": False,
+        "value": 0
+    },  # 玩家已死亡
 }
 default_ui = {
     "language": "zh-cn"

@@ -32,6 +32,10 @@ language = {
         "GUN_RANGE": "射程",
         "EXPLOSION_DAMAGE": "爆炸伤害",
         "FLY": "飞行",
+        "NO_KEY": "无需钥匙",
+        "DOUBLE_COIN": "双倍金币",
+        "ITEM_CAN_DESTROY": "物品可破坏",
+        "PLAYER_IS_DIE": "玩家已死亡",
     },
     "en-us": {
         "title": "Neon Abyss 2 Helper",
@@ -66,5 +70,9 @@ language = {
         "GUN_RANGE": "Range",
         "EXPLOSION_DAMAGE": "Explosion damage",
         "FLY": "Fly",
+        "NO_KEY": "Not Key",
+        "DOUBLE_COIN": "Double Coin",
+        "ITEM_CAN_DESTROY": "Item destroy",
+        "PLAYER_IS_DIE": "Is Death",
     }
 }
