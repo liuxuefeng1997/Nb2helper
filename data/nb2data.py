@@ -1,9 +1,9 @@
 EXE_NAME = "NeonAbyss2.exe"
 versionInfo = {
-    "version": "2025.07.29.0212.0046",
+    "version": "2025.07.29.1749.0047",
     "lines": [
         "1、更新支持最新版本",
-        "2、新增飞行修改开关",
+        "2、新增 飞行、无需钥匙、双倍金币、玩家是否死亡 修改",
     ]
 }
 DEFAULT_DICT = {'dll_name': "UnityPlayer.dll", 'dll_offset': 0x01C87660, 'offsets': [0x8, 0x10, 0x28, 0x68, 0x20, 0x18, 0x10, 0x18, 0x0]}
