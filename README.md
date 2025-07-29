@@ -9,28 +9,18 @@
 * 更多修改项（大概吧
 
 ## 修改项
-| 属性名             | 名称        | 支持状态  |
-|-------------------|------------|----------|
-| HEALTH            | 血量        | ✅       |
-| MAX_HEALTH        | 血量上限     | ✅       |
-| MANA              | 水晶        | ✅       |
-| MAX_MANA          | 水晶上限     | ✅       |
-| SHIELDS           | 护盾        | ✅       |
-| BOMBER            | 手雷        | ✅       |
-| KEYS              | 钥匙        | ✅       |
-| GOLD              | 金币        | ✅       |
-| GUN_SPEED         | 射速        | ✅       |
-| MOVE_SPEED        | 移速        | ✅       |
-| TEMP_JUMP_SUM     | 临时跳跃次数  | ✅       |
-| GUN_BALLISTICS    | 弹道数量     | ✅       |
-| GUN_RANGE         | 射程        | ✅       |
-| EXPLOSION_DAMAGE  | 爆炸伤害     | ✅        |
-| FLY               | 飞行        | ✅        |
-| NO_KEY            | 无需钥匙     | ✅       |
-| DOUBLE_COIN       | 双倍金币     | ✅       |
-| ITEM_CAN_DESTROY  | 物品可破坏   | ✅       |
-| PLAYER_IS_DIE     | 玩家已死亡   | ✅       |
-| BOX_PFX           | 宝箱判定范围 | ✅       |
+| 属性名             | 名称        | 支持状态  | 属性名             | 名称        | 支持状态  |
+|-------------------|------------|----------|-------------------|------------|----------|
+| HEALTH            | 血量        | ✅       | TEMP_JUMP_SUM     | 临时跳跃次数  | ✅       |
+| MAX_HEALTH        | 血量上限     | ✅       | GUN_BALLISTICS    | 弹道数量     | ✅       |
+| MANA              | 水晶        | ✅       | GUN_RANGE         | 射程        | ✅       |
+| MAX_MANA          | 水晶上限     | ✅       | EXPLOSION_DAMAGE  | 爆炸伤害     | ✅        |
+| SHIELDS           | 护盾        | ✅       | FLY               | 飞行        | ✅        |
+| BOMBER            | 手雷        | ✅       | NO_KEY            | 无需钥匙     | ✅       |
+| KEYS              | 钥匙        | ✅       | DOUBLE_COIN       | 双倍金币     | ✅       |
+| GOLD              | 金币        | ✅       | ITEM_CAN_DESTROY  | 物品可破坏   | ✅       |
+| GUN_SPEED         | 射速        | ✅       | PLAYER_IS_DIE     | 玩家已死亡   | ✅       |
+| MOVE_SPEED        | 移速        | ✅       | BOX_PFX           | 宝箱判定范围 | ✅       |
 
 <br>
 <br>
