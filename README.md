@@ -30,6 +30,7 @@
 | DOUBLE_COIN       | 双倍金币     | ✅       |
 | ITEM_CAN_DESTROY  | 物品可破坏   | ✅       |
 | PLAYER_IS_DIE     | 玩家已死亡   | ✅       |
+| BOX_PFX           | 宝箱判定范围 | ✅       |
 
 <br>
 <br>

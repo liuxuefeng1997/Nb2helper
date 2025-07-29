@@ -1,9 +1,9 @@
 EXE_NAME = "NeonAbyss2.exe"
 versionInfo = {
-    "version": "2025.07.29.1749.0047",
+    "version": "2025.07.29.1805.0048",
     "lines": [
         "1、更新支持最新版本",
-        "2、新增 飞行、无需钥匙、双倍金币、玩家是否死亡 修改",
+        "2、新增 飞行、无需钥匙、双倍金币、玩家是否死亡、宝箱判定范围 修改",
     ]
 }
 DEFAULT_DICT = {'dll_name': "UnityPlayer.dll", 'dll_offset': 0x01C87660, 'offsets': [0x8, 0x10, 0x28, 0x68, 0x20, 0x18, 0x10, 0x18, 0x0]}
@@ -123,4 +123,10 @@ NB2_DATA = {
         "offsets": [0x8, 0x10, 0x28, 0x68, 0x238, 0x1E4],
         "valueType": "b"
     },  # 玩家已死亡
+    "BOX_PFX": {
+        "dll_name": "UnityPlayer.dll",
+        "dll_offset": 0x01C87660,
+        "offsets": [0x8, 0x10, 0x28, 0x68, 0x238, 0x590, 0x1F0],
+        "valueType": "f"
+    },  # 宝箱判断范围
 }

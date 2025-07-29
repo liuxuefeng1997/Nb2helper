@@ -36,6 +36,7 @@ language = {
         "DOUBLE_COIN": "双倍金币",
         "ITEM_CAN_DESTROY": "物品可破坏",
         "PLAYER_IS_DIE": "玩家已死亡",
+        "BOX_PFX": "宝箱判定范围",
     },
     "en-us": {
         "title": "Neon Abyss 2 Helper",
@@ -74,5 +75,6 @@ language = {
         "DOUBLE_COIN": "Double Coin",
         "ITEM_CAN_DESTROY": "Item destroy",
         "PLAYER_IS_DIE": "Is Death",
+        "BOX_PFX": "Chest determination",
     }
 }

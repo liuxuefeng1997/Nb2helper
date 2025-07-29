@@ -76,6 +76,10 @@ default_config = {
         "enable": False,
         "value": 0
     },  # 玩家已死亡
+    "BOX_PFX": {
+        "enable": False,
+        "value": 1.0
+    },  # 宝箱判断范围
 }
 default_ui = {
     "language": "zh-cn"
