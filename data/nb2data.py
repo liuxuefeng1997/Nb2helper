@@ -1,8 +1,8 @@
 EXE_NAME = "NeonAbyss2.exe"
 versionInfo = {
-    "version": "2025.07.29.1832.0049",
+    "version": "2025.08.02.2045.0050",
     "lines": [
-        "1、修复问题",
+        "1、更新2025.8.1版本适配",
         # "2、新增 飞行、无需钥匙、双倍金币、玩家是否死亡、宝箱判定范围 修改",
     ]
 }
@@ -96,25 +96,25 @@ NB2_DATA = {
     "FLY": {
         "dll_name": "UnityPlayer.dll",
         "dll_offset": 0x01C87660,
-        "offsets": [0x8, 0x10, 0x28, 0x68, 0x238, 0x590, 0x3C3],
+        "offsets": [0x8, 0x10, 0x28, 0x68, 0x238, 0x5A0, 0x3C3],
         "valueType": "b"
     },  # 飞行
     "NO_KEY": {
         "dll_name": "UnityPlayer.dll",
         "dll_offset": 0x01C87660,
-        "offsets": [0x8, 0x10, 0x28, 0x68, 0x238, 0x590, 0x2F0],
+        "offsets": [0x8, 0x10, 0x28, 0x68, 0x238, 0x5A0, 0x2F0],
         "valueType": "b"
     },  # 无需钥匙
     "DOUBLE_COIN": {
         "dll_name": "UnityPlayer.dll",
         "dll_offset": 0x01C87660,
-        "offsets": [0x8, 0x10, 0x28, 0x68, 0x238, 0x590, 0x76],
+        "offsets": [0x8, 0x10, 0x28, 0x68, 0x238, 0x5A0, 0x76],
         "valueType": "b"
     },  # 双倍金币
     "ITEM_CAN_DESTROY": {
         "dll_name": "UnityPlayer.dll",
         "dll_offset": 0x01C87660,
-        "offsets": [0x8, 0x10, 0x28, 0x68, 0x238, 0x590, 0x0F0],
+        "offsets": [0x8, 0x10, 0x28, 0x68, 0x238, 0x5A0, 0x0F0],
         "valueType": "b"
     },  # 物品可破坏
     "PLAYER_IS_DIE": {
@@ -126,7 +126,7 @@ NB2_DATA = {
     "BOX_PFX": {
         "dll_name": "UnityPlayer.dll",
         "dll_offset": 0x01C87660,
-        "offsets": [0x8, 0x10, 0x28, 0x68, 0x238, 0x590, 0x1F0],
+        "offsets": [0x8, 0x10, 0x28, 0x68, 0x238, 0x5A0, 0x1F0],
         "valueType": "f"
     },  # 宝箱判断范围
 }
